@@ -253,7 +253,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
     private void FilmsAdmin()
     {
-         Clear();
+        Clear();
         string prompt = "Selecter een film en klik op ENTER om te verwerken";
         FilmsLogic filmsLogic = new FilmsLogic();
 
