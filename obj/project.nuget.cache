@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "DkrKF14s9TRxue5w55s9kjGUTaQOrtf1fJ6pUOm/ycxzuqzY6y6h6rLnZj4RbQAkfrvLoRyUYHGYWaRv/Qeg1Q==",
+  "dgSpecHash": "86a7BzEc+D5j3VqhGVqSQ3a9rYjg8MjYl4VULDAQRSTznGs831iLusxfS3sjh3T+xMRCLbTTcqiYrkHz06MKQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios\\Project.csproj",
+  "projectFilePath": "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\herot\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\yusuf\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

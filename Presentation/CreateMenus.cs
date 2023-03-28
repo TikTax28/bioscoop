@@ -218,7 +218,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         Environment.Exit(0);
     }
 
-    private void Admin()
+    public void AdminMenu()
     {
         string prompt = "Selecteer een optie en klik op ENTER om te bevestigen";
 
@@ -251,7 +251,33 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         }
     }
 
-    private void FilmsAdmin()
+    public void FilmsAdmin()
+    {
+        string prompt = "Selecteer een optie en klik op ENTER om te bevestigen";
+
+        string[] options = {"Films toevoegen", "Films verwijderen", "Film informatie aanpassen", "Terug"};
+        Menu Admin = new Menu(prompt, options);
+        int SelectedIndex = Admin.Run();
+
+        switch (SelectedIndex)
+        {
+            case 0:
+                //AdminAddFilm();
+                break;
+            case 1:
+                AdminRemoveFilm();
+                break;
+            case 2:
+                //AdminInfoFilm();
+                break;
+            case 3:
+                AdminMenu();
+                break;
+            default:
+                break;
+        }
+    }
+    public void AdminRemoveFilm()
     {
         Clear();
         string prompt = "Selecter een film en klik op ENTER om te verwerken";
@@ -264,9 +290,16 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             Array.Resize(ref options, options.Length + 1);
             options[options.Length - 1] = allFilms.filmName;
         }
-        int length = options.Length;
-        Array.Resize(ref options, length + 1);
-        options[length] = "Terug";
+
+        // Shift all elements one place to the right
+        Array.Resize(ref options, options.Length + 1);
+        for (int i = options.Length - 2; i >= 0; i--)
+        {
+            options[i + 1] = options[i];
+        }
+
+        // Add "Terug" at the end
+        options[options.Length - 1] = "Terug";
 
         HashSet<string> hashSet = new HashSet<string>(options);
         options = hashSet.ToArray();
@@ -276,44 +309,38 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
         if (SelectedIndex < options.Length - 1)
         {
-            RemoveFilm(options[SelectedIndex]);
+            Clear();
+            prompt = @"Weet je zeker dat je wilt verwijderen?";
+
+            string[] options2 = {"Ja", "Nee, ga terug"};
+            Menu menu = new Menu(prompt, options2);
+            int SelectedIndex2 = menu.Run();
+
+            switch (SelectedIndex2)
+            {
+                case 0:
+                        while (filmsLogic.GetByName(options[SelectedIndex]) != null)
+                        {
+                            filmsLogic.DeleteFilm(filmsLogic.GetByName(options[SelectedIndex]));
+                        }
+                        AdminRemoveFilm();
+                        break;
+                case 1:
+                        AdminRemoveFilm();
+                        break;
+                default:
+                        break;
+            }
         }
         else
         {
-            // Returns you to the previous screen
+            FilmsAdmin();
         }
     }
 
     private void AddFilm()
     {
 
-    }
-
-    private void RemoveFilm(string filmname)
-    {
-        Clear();
-        string prompt = @"Weet je zeker dat je wilt verwijderen?";
-
-        string[] options = {"Ja", "Nee, ga terug"};
-        Menu menu = new Menu(prompt, options);
-        int SelectedIndex = menu.Run();
-
-        switch (SelectedIndex)
-        {
-            case 0:
-                    FilmsLogic filmsLogic = new FilmsLogic();
-                    while (filmsLogic.GetByName(filmname) != null)
-                    {
-                        filmsLogic.DeleteFilm(filmsLogic.GetByName(filmname));
-                    }
-                    FilmsAdmin();
-                    break;
-            case 1:
-                    FilmsAdmin();
-                    break;
-            default:
-                    break;
-        }
     }
 
     private void ChangeFilm()
