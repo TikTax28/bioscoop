@@ -28,5 +28,17 @@
     "emailAddress": "123",
     "password": "123",
     "fullName": "123"
+  },
+  {
+    "id": 6,
+    "emailAddress": "abc@a",
+    "password": "123",
+    "fullName": "Hans Berend Gans"
+  },
+  {
+    "id": 7,
+    "emailAddress": "yusuf@rijexamen.nl",
+    "password": "1234",
+    "fullName": "yusuf"
   }
 ]
