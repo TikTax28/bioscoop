@@ -65,16 +65,13 @@ static class User
         {
             WriteLine("Vul hier uw email in:");
             EmailAddress = ReadLine();
-
-            string json = File.ReadAllText(@"DataSources/accounts.json");
-            List<Dictionary<string, object>> ?accounts = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
             EmailInUse = false;
-            foreach (var account in accounts)
+            foreach (AccountModel allAccounts in accountsLogic.GetAllAccounts())
             {
-                string email = Convert.ToString(account["emailAddress"]);
+                string email = allAccounts.EmailAddress;
                 if (email == EmailAddress)
                 {
-                    WriteLine("Emailadres is al ingebruik kies een andere.");
+                    WriteLine("Emailadres is al in gebruik kies een andere.");
                     EmailInUse = true;
                     break;
                 }
