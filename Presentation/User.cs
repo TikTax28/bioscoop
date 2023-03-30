@@ -32,9 +32,7 @@ static class User
     public static void AddAccToJson(string EmailAddress, string PassWord, string FullName)// gegevens toevoegen aan json lijst.
     {
         int _numberAccounts;
-        string json = File.ReadAllText(@"DataSources/accounts.json");
-        List<Dictionary<string, object>> ?accounts = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
-        _numberAccounts = accounts.Count;
+        _numberAccounts = accountsLogic._accounts.Count;
         AccountModel NewUser = new AccountModel(_numberAccounts + 1, EmailAddress, PassWord, FullName);
         accountsLogic.UpdateList(NewUser);
     }
