@@ -117,10 +117,12 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 Film1();
                 break;
             case 1:
+                Film1();
                 break;
             case 2:
+                Film1();
                 break;
-                case 3:
+            case 3:
                 LoggedInMenu();
                 break;
             default:
@@ -163,7 +165,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
     {
         string prompt = @"Cocain Bear";
 
-        string[] options = {"Cocaine Bear is gebaseerd op een waargebeurd verhaal uit 1985 over een drugssmokkelaar, wiens vliegtuig neerstort, en de zwarte beer die de zoekgeraakte cocaïne verorbert.", "Verder", "Terug"};
+        string[] options = {"Cocain Bear is gebaseerd op een waargebeurd verhaal uit 1985 over een drugssmokkelaar, wiens vliegtuig neerstort, en de zwarte beer die de zoekgeraakte cocaïne verorbert.", "Verder", "Terug"};
         Menu logMenu = new Menu(prompt, options);
         int SelectedIndex = logMenu.Run();
 
@@ -200,8 +202,10 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 Snacks();
                 break;
             case 1:
+                Snacks();
                 break;
             case 2:
+                Snacks();
                 break;
             case 3:
                 Film1();        
