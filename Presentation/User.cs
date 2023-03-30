@@ -37,38 +37,76 @@ static class User
         accountsLogic.UpdateList(NewUser);
     }
 
-    
-
     public static void CreateAcc()
     {
         string ?FullName;
         string ?EmailAddress;
         string ?PassWord;
+        bool ?EmailInUse = false;
         Clear();
         while (true) // Volledige naam van gebruiker vragen.
         {
             WriteLine("Wat is uw volledige naam? (bijv. Hans Berend Gans)");
             FullName = ReadLine();
-            if (FullName != "")
+            if (FullName == "")
             {
-                break;
+                WriteLine("Uw naam moet tekst bevatten, vul uw volledige naam in.");
+            }
+            else if (FullName.Length >= 33)
+            {
+                WriteLine("Naam kan niet meer dan 33 karakters zijn. Vul uw naam opnieuw in.");
             }
             else
             {
-                WriteLine("Uw naam moet tekst bevatten, vul uw volledige naam in.");
+                break;
             }
         }
         while (true) // email opvragen van gebruiker.
         {
             WriteLine("Vul hier uw email in:");
             EmailAddress = ReadLine();
-            if (EmailAddress != "")
+
+            string json = File.ReadAllText(@"DataSources/accounts.json");
+            List<Dictionary<string, object>> ?accounts = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
+            EmailInUse = false;
+            foreach (var account in accounts)
             {
-                break;
+                string email = Convert.ToString(account["emailAddress"]);
+                if (email == EmailAddress)
+                {
+                    WriteLine("Emailadres is al ingebruik kies een andere.");
+                    EmailInUse = true;
+                    break;
+                }
             }
-            else
+            if (EmailAddress == "")
             {
                 WriteLine("Uw email moet tekst bevatten, vul uw email opnieuw in.");
+                continue;
+            }
+            else if (EmailAddress.Length > 64)
+            {
+                WriteLine("Uw email mag niet meer dan 64 karakters bevatten, vul uw email opnieuw in.");
+                continue;
+            }
+            else if (EmailAddress.Contains("@") && EmailInUse == false)
+            {
+                int atSymbolIndex = EmailAddress.IndexOf("@");
+
+                if (atSymbolIndex > 0 && atSymbolIndex < EmailAddress.Length - 1)
+                {
+                    break;
+                }
+                else
+                {
+                    WriteLine("Ongeldig emailadres formaat, u moet minimaal een karakter voor de '@' en na de '@', vul uw email opnieuw in.");
+                    continue;
+                }
+            }
+            else if (EmailAddress.Contains("@") == false && EmailInUse == false)
+            {
+                WriteLine("Uw emailadres moet een '@' symbool bevatten, vul uw email opnieuw in.");
+                continue;
             }
         }
         while (true)
