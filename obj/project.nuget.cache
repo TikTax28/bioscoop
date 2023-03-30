@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "W07IpZpEBSryeIOmFEcOGxbuaZAyiHIcTEdueOO1JrvsA06vbSbEywLu7VmzpwjMcjyBi1eYrxIdCz7uhKLaTg==",
+  "dgSpecHash": "Ab7R2Uf+emTzkKwaJt7OUBpKxtfOrnP9Cc4D6RPW40SWwPD1AgJ+YO2Ycxkhtf15mqbigmInCgb4CDCLUITvDQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jaspe\\OneDrive\\Csharp\\updated project B\\bioscoop\\Project.csproj",
+  "projectFilePath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop\\bioscoop\\Project.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\jaspe\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\herot\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }
