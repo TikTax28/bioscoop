@@ -13,12 +13,12 @@ class Menu
     {
         Prompt = prompt;
         Options = options;
-        SelectedIndex = 0;
+        SelectedIndex = 0; // Geselecteerde optie begint bij de eerste optie
     }
 
     private void DisplayOptions()
     {
-        WriteLine(Prompt);
+        WriteLine(Prompt); // Toon de prompt
         for (int i = 0; i < Options.Length; i++)
         {
             string currentOption = Options[i];
@@ -26,51 +26,51 @@ class Menu
 
             if (i == SelectedIndex)
             {
-                prefix = "*";
+                prefix = "*"; // Voeg een asterisk toe aan de geselecteerde optie
                 ForegroundColor = ConsoleColor.Black;
-                BackgroundColor = ConsoleColor.White;
+                BackgroundColor = ConsoleColor.White; // Geef de geselecteerde optie een witte achtergrondkleur
             }
             else
             {
                 prefix = " ";
-                BackgroundColor = ConsoleColor.Black;
-                ForegroundColor = ConsoleColor.White;
+                BackgroundColor = ConsoleColor.Black; 
+                ForegroundColor = ConsoleColor.White; // Geef de niet-geselecteerde opties een zwarte achtergrondkleur
             }
 
-            WriteLine($"{prefix} << {currentOption} >>");
+            WriteLine($"{prefix} << {currentOption} >>"); // Toon de opties met de prefix en pijltjes eromheen
         }
-        ResetColor();
+        ResetColor(); // Reset de kleuren van de console
     }
     public int Run()
     {
         ConsoleKey keyPressed;
         do
         {
-            Clear();
-            DisplayOptions();
-            ConsoleKeyInfo keyInfo = ReadKey(true);
-            keyPressed = keyInfo.Key;
+            Clear(); // Maak de console leeg
+            DisplayOptions(); // Toon de beschikbare opties
+            ConsoleKeyInfo keyInfo = ReadKey(true); // Wacht op een toetsaanslag
+            keyPressed = keyInfo.Key; // Haal de toets die is ingedrukt op
 
 
-            if (keyPressed == ConsoleKey.UpArrow)
+            if (keyPressed == ConsoleKey.UpArrow) // Ga naar de vorige optie als de pijl-omhoog toets wordt ingedrukt
             {
                 SelectedIndex--;
                 if (SelectedIndex == -1)
                 {
-                    SelectedIndex = Options.Length - 1;
+                    SelectedIndex = Options.Length - 1; // Ga terug naar de laatste optie als de eerste optie geselecteerd is en de pijl-omhoog toets wordt ingedrukt
                 }
             }
-            else if (keyPressed == ConsoleKey.DownArrow)
+            else if (keyPressed == ConsoleKey.DownArrow) // Ga naar de volgende optie als de pijl-omlaag toets wordt ingedrukt
             {
                 SelectedIndex++;
                 if (SelectedIndex == Options.Length)
                 {
-                    SelectedIndex = 0;
+                    SelectedIndex = 0; // Ga terug naar de eerste optie als de laatste optie geselecteerd is en de pijl-omlaag toets wordt ingedrukt
                 }
             }
 
-        } while (keyPressed != ConsoleKey.Enter);
+        } while (keyPressed != ConsoleKey.Enter); // Blijf doorgaan totdat de Enter-toets wordt ingedrukt
 
-        return SelectedIndex;
+        return SelectedIndex; // Geef de index van de geselecteerde optie terug
     }
 }

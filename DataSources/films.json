@@ -14,11 +14,17 @@
   {
     "id": 4,
     "filmName": "Zombie Apocalypse",
-    "filmDate": "31-3-2023",
+    "filmDate": "30-3-2023",
     "filmTime": "13:30"
   },
   {
     "id": 5,
+    "filmName": "Zombie Apocalypse",
+    "filmDate": "31-3-2023",
+    "filmTime": "13:30"
+  },
+  {
+    "id": 6,
     "filmName": "Zombie Apocalypse",
     "filmDate": "31-3-2023",
     "filmTime": "14:30"
