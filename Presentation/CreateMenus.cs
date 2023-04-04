@@ -105,29 +105,121 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
     private void FilmMenu()
     {
-        string prompt = "Selecter een film en klik op ENTER om te bevestigen";
+        Clear();
+        string prompt = "Selecter een film en klik op ENTER";
+        FilmsLogic filmsLogic = new FilmsLogic();
+        string[] options = new string[0];
 
-        string[] options = {"Film1", "...", "...", "Terug"};
+        foreach (FilmModel allFilms in filmsLogic.GetAllFilms())
+        {
+            Array.Resize(ref options, options.Length + 1);
+            options[options.Length - 1] = allFilms.filmName;
+        }
+
+        // Shift all elements one place to the right
+        Array.Resize(ref options, options.Length + 1);
+        for (int i = options.Length - 2; i >= 0; i--)
+        {
+            options[i + 1] = options[i];
+        }
+
+        // Add "Terug" at the end
+        options[options.Length - 1] = "Terug";
+
+        HashSet<string> hashSet = new HashSet<string>(options);
+        options = hashSet.ToArray();
         Menu Films = new Menu(prompt, options);
         int SelectedIndex = Films.Run();
+        if (SelectedIndex < options.Length - 1)
+        {
+            FilmTimes(options[SelectedIndex]);
+        }
+    }
 
-        switch (SelectedIndex)
+    private void FilmTimes(string filmName)
+    {
+        Clear();
+        FilmsLogic filmsLogic = new FilmsLogic();
+        string prompt = $"{filmName} \nKlik een tijd en klik op ENTER";
+        string[] options = new string[0];
+
+        // Create a dictionary that maps each date to a list of times for the selected film
+        Dictionary<string, List<string>> dateToTimes = new Dictionary<string, List<string>>();
+        foreach (FilmModel film in filmsLogic.GetAllFilms())
+        {
+            if (film.filmName == filmName)
+            {
+                if (!dateToTimes.ContainsKey(film.filmDate))
+                {
+                    dateToTimes.Add(film.filmDate, new List<string>());
+                }
+                dateToTimes[film.filmDate].Add(film.filmTime);
+            }
+        }
+
+        // Create options array for the menu by iterating through the dictionary
+        List<string> optionsList = new List<string>();
+        foreach (KeyValuePair<string, List<string>> entry in dateToTimes)
+        {
+            optionsList.Add(entry.Key);
+            foreach (string time in entry.Value)
+            {
+                optionsList.Add(time);
+            }
+        }
+        optionsList.Add("Terug");
+
+        options = optionsList.ToArray();
+
+        switch (dateToTimes.Count)
         {
             case 0:
-                Film1();
+                WriteLine("Er zijn geen tijden beschikbaar voor deze film.");
                 break;
             case 1:
-                Film1();
-                break;
-            case 2:
-                Film1();
-                break;
-            case 3:
-                LoggedInMenu();
+                // Only one date, show times directly
+                int selectedIndex = new Menu(prompt, options).Run() - 1; // subtract one to skip the date option
+                if (selectedIndex >= 0 && selectedIndex < dateToTimes.Values.First().Count)
+                {
+                    // valid time selected, do something
+                    string selectedTime = dateToTimes.Values.First()[selectedIndex];
+                    // ...
+                }
+                else
+                {
+                    FilmMenu();
+                    break;
+                }
                 break;
             default:
+                // Multiple dates, show date options first
+                int selectedDateIndex = new Menu(prompt, options.Take(dateToTimes.Count).ToArray()).Run() - 1; // subtract one to get index
+                if (selectedDateIndex >= 0 && selectedDateIndex < dateToTimes.Count)
+                {
+                    // valid date selected, show time options for that date
+                    string selectedDate = dateToTimes.Keys.ElementAt(selectedDateIndex);
+                    List<string> timesForSelectedDate = dateToTimes[selectedDate];
+                    int selectedTimeIndex = new Menu(prompt, timesForSelectedDate.ToArray()).Run() - 1; // subtract one to get index
+                    if (selectedTimeIndex >= 0 && selectedTimeIndex < timesForSelectedDate.Count)
+                    {
+                        // valid time selected, do something
+                        string selectedTime = timesForSelectedDate[selectedTimeIndex];
+                        // ...
+                    }
+                    else
+                    {
+                        // "Terug" selected or invalid input, do something else
+                        FilmMenu();
+                        break;
+                    }
+                }
+                else
+                {
+                    FilmMenu();
+                    break;
+                }
                 break;
-}
+        }
     }
 
     private void Reservations()
