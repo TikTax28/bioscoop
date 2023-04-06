@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop-1\\bioscoop\\Project.csproj": {}
+    "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop-1\\bioscoop\\Project.csproj": {
+    "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop-1\\bioscoop\\Project.csproj",
+        "projectUniqueName": "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop-1\\bioscoop\\Project.csproj",
-        "packagesPath": "C:\\Users\\herot\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop-1\\bioscoop\\obj\\",
+        "projectPath": "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj",
+        "packagesPath": "C:\\Users\\yusuf\\.nuget\\packages\\",
+        "outputPath": "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\herot\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\yusuf\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"

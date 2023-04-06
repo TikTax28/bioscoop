@@ -77,6 +77,8 @@ C:\Development\CSharp\new-bioscoop-main\bioscoop\obj\Debug\net6.0\refint\Project
 C:\Development\CSharp\new-bioscoop-main\bioscoop\obj\Debug\net6.0\Project.pdb
 C:\Development\CSharp\new-bioscoop-main\bioscoop\obj\Debug\net6.0\Project.genruntimeconfig.cache
 C:\Development\CSharp\new-bioscoop-main\bioscoop\obj\Debug\net6.0\ref\Project.dll
+<<<<<<< HEAD
+=======
 C:\Users\herot\OneDrive\Bureaublad\bios-branch\bioscoop\bin\Debug\net6.0\Project.exe
 C:\Users\herot\OneDrive\Bureaublad\bios-branch\bioscoop\bin\Debug\net6.0\Project.deps.json
 C:\Users\herot\OneDrive\Bureaublad\bios-branch\bioscoop\bin\Debug\net6.0\Project.runtimeconfig.json
@@ -145,3 +147,4 @@ C:\Users\herot\OneDrive\Bureaublad\bios-branch\bioscoop-1\bioscoop\obj\Debug\net
 C:\Users\herot\OneDrive\Bureaublad\bios-branch\bioscoop-1\bioscoop\obj\Debug\net6.0\Project.pdb
 C:\Users\herot\OneDrive\Bureaublad\bios-branch\bioscoop-1\bioscoop\obj\Debug\net6.0\Project.genruntimeconfig.cache
 C:\Users\herot\OneDrive\Bureaublad\bios-branch\bioscoop-1\bioscoop\obj\Debug\net6.0\ref\Project.dll
+>>>>>>> f0fe1041198a583060592812d5cbe55c5a21f18d

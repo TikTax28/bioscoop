@@ -358,7 +358,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         switch (SelectedIndex)
         {
             case 0:
-                //AdminAddFilm();
+                AdminAddFilm();
                 break;
             case 1:
                 AdminRemoveFilm();
@@ -373,10 +373,40 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 break;
         }
     }
+
+    public void AdminAddFilm()
+    {
+        Clear();
+        WriteLine("Voeg een film toe");
+        WriteLine();
+        WriteLine("Filmnaam: ");
+        string ?filmname = ReadLine();
+        WriteLine("Filmdatum: ");
+        string ?filmdate = ReadLine();
+        WriteLine("Filmtijd: ");
+        string ?filmtime = ReadLine();
+        FilmsLogic filmslogic = new FilmsLogic();
+        if (filmslogic.CheckFilm(filmname, filmdate, filmtime))
+        {
+            filmslogic.AddFilm(filmname, filmdate, filmtime);
+            Clear();
+            var temp = new CreateMenus();
+            temp.FilmsAdmin();
+        }
+        else
+        {
+            WriteLine("Probeer opnieuw.");
+            ReadLine();
+            Clear();
+            var temp = new CreateMenus();
+            temp.FilmsAdmin();
+        }
+    }
+
     public void AdminRemoveFilm()
     {
         Clear();
-        string prompt = "Selecter een film en klik op ENTER om te verwerken";
+        string prompt = "Selecter een film en klik op ENTER om te verwijderen";
         FilmsLogic filmsLogic = new FilmsLogic();
 
         string[] options = new string[0];
@@ -388,7 +418,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         }
 
         // Shift all elements one place to the right
-        Array.Resize(ref options, options.Length + 1);
+        Array.Resize(ref options, options.Length + 2);
         for (int i = options.Length - 2; i >= 0; i--)
         {
             options[i + 1] = options[i];
@@ -432,11 +462,6 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         {
             FilmsAdmin();
         }
-    }
-
-    private void AddFilm()
-    {
-
     }
 
     private void ChangeFilm()
