@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj": {}
+    "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj": {}
   },
   "projects": {
-    "c:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj": {
+    "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj",
+        "projectUniqueName": "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "c:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj",
+        "projectPath": "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\Project.csproj",
         "packagesPath": "C:\\Users\\yusuf\\.nuget\\packages\\",
-        "outputPath": "c:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\obj\\",
+        "outputPath": "C:\\Development\\CSharp\\new-bioscoop-main\\bioscoop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yusuf\\AppData\\Roaming\\NuGet\\NuGet.Config"
