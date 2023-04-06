@@ -118,10 +118,6 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
         // Shift all elements one place to the right
         Array.Resize(ref options, options.Length + 1);
-        for (int i = options.Length - 2; i >= 0; i--)
-        {
-            options[i + 1] = options[i];
-        }
 
         // Add "Terug" at the end
         options[options.Length - 1] = "Terug";
@@ -134,14 +130,18 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         {
             FilmTimes(options[SelectedIndex]);
         }
+        else
+        {
+            LoggedInMenu();
+        }
     }
 
     private void FilmTimes(string filmName)
     {
         Clear();
         FilmsLogic filmsLogic = new FilmsLogic();
-        string prompt = $"{filmName} \nKlik een tijd en klik op ENTER";
-        string[] options = new string[0];
+        string prompt2 = "Kies een tijd en klik op ENTER";
+
 
         // Create a dictionary that maps each date to a list of times for the selected film
         Dictionary<string, List<string>> dateToTimes = new Dictionary<string, List<string>>();
@@ -157,70 +157,47 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             }
         }
 
-        // Create options array for the menu by iterating through the dictionary
-        List<string> optionsList = new List<string>();
-        foreach (KeyValuePair<string, List<string>> entry in dateToTimes)
+        // Create options array for the date menu
+        string[] dateOptions = dateToTimes.Keys.ToArray();
+        dateOptions = dateOptions.Append("Terug").ToArray();
+
+        while (true)
         {
-            optionsList.Add(entry.Key);
-            foreach (string time in entry.Value)
+            int selectedDateIndex = new Menu($"{prompt2}", dateOptions).Run() - 1; // subtract one to get index
+
+            if (selectedDateIndex >= 0 && selectedDateIndex < dateOptions.Length - 1)
             {
-                optionsList.Add(time);
-            }
-        }
-        optionsList.Add("Terug");
-
-        options = optionsList.ToArray();
-
-        switch (dateToTimes.Count)
-        {
-            case 0:
-                WriteLine("Er zijn geen tijden beschikbaar voor deze film.");
-                break;
-            case 1:
-                // Only one date, show times directly
-                int selectedIndex = new Menu(prompt, options).Run() - 1; // subtract one to skip the date option
-                if (selectedIndex >= 0 && selectedIndex < dateToTimes.Values.First().Count)
+                // Show time options for the selected date
+                string selectedDate = dateOptions[selectedDateIndex];
+                List<string> timesForSelectedDate = dateToTimes[selectedDate];
+                int selectedTimeIndex = new Menu($"{selectedDate}\nKlik een tijd en klik op ENTER", timesForSelectedDate.ToArray()).Run() - 1; // subtract one to get index
+                
+                if (selectedTimeIndex >= 0 && selectedTimeIndex < timesForSelectedDate.Count)
                 {
                     // valid time selected, do something
-                    string selectedTime = dateToTimes.Values.First()[selectedIndex];
+                    string selectedTime = timesForSelectedDate[selectedTimeIndex];
                     // ...
                 }
                 else
                 {
-                    FilmMenu();
-                    break;
+                    // Invalid time index selected, go back to date selection
+                    Console.WriteLine("Ongeldige keuze. Probeer opnieuw.");
                 }
+            }
+            else if (selectedDateIndex == dateOptions.Length - 1)
+            {
+                // Go back to previous menu when 'Terug' is selected
+                FilmMenu();
                 break;
-            default:
-                // Multiple dates, show date options first
-                int selectedDateIndex = new Menu(prompt, options.Take(dateToTimes.Count).ToArray()).Run() - 1; // subtract one to get index
-                if (selectedDateIndex >= 0 && selectedDateIndex < dateToTimes.Count)
-                {
-                    // valid date selected, show time options for that date
-                    string selectedDate = dateToTimes.Keys.ElementAt(selectedDateIndex);
-                    List<string> timesForSelectedDate = dateToTimes[selectedDate];
-                    int selectedTimeIndex = new Menu(prompt, timesForSelectedDate.ToArray()).Run() - 1; // subtract one to get index
-                    if (selectedTimeIndex >= 0 && selectedTimeIndex < timesForSelectedDate.Count)
-                    {
-                        // valid time selected, do something
-                        string selectedTime = timesForSelectedDate[selectedTimeIndex];
-                        // ...
-                    }
-                    else
-                    {
-                        // "Terug" selected or invalid input, do something else
-                        FilmMenu();
-                        break;
-                    }
-                }
-                else
-                {
-                    FilmMenu();
-                    break;
-                }
-                break;
+            }
+            else
+            {
+                Console.WriteLine("Ongeldige keuze. Probeer opnieuw.");
+            }
         }
+
     }
+
 
     private void Reservations()
     {
@@ -250,35 +227,9 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 break;
             default:
                 break;
-}
-    }
-
-    public void Film1()
-    {
-        string prompt = @"Cocain Bear";
-
-        string[] options = {"Cocain Bear is gebaseerd op een waargebeurd verhaal uit 1985 over een drugssmokkelaar, wiens vliegtuig neerstort, en de zwarte beer die de zoekgeraakte cocaïne verorbert.", "Verder", "Terug"};
-        Menu logMenu = new Menu(prompt, options);
-        int SelectedIndex = logMenu.Run();
-
-        switch (SelectedIndex)
-        {
-            case 0:
-                Clear();
-                Film1();
-                break;
-            case 1:
-                Clear();
-                Snacks();
-                break;
-            case 2:
-                Clear();
-                FilmMenu();
-                break;
-            default:
-                break;
         }
     }
+
 
     public void Snacks()
     {
@@ -299,8 +250,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             case 2:
                 Snacks();
                 break;
-            case 3:
-                Film1();        
+            case 3:        
                 break;
             default:
                 break;
