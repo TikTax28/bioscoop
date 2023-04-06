@@ -1,14 +1,23 @@
 [
   {
     "id": 1,
-    "emailAddress": "tom",
+    "emailAddress": "tom@nl",
     "password": "tom",
-    "fullName": "Tom Tom"
+    "fullName": "Tom Tom",
+    "isAdmin": true
   },
   {
     "id": 2,
-    "emailAddress": "abc",
+    "emailAddress": "abc@nl",
     "password": "abc",
-    "fullName": "abc"
+    "fullName": "abc",
+    "isAdmin": false
+  },
+  {
+    "id": 3,
+    "emailAddress": "hans@gmail",
+    "password": "abc",
+    "fullName": "hans",
+    "isAdmin": false
   }
 ]

@@ -59,7 +59,3 @@ class AccountsLogic
         return CurrentAccount;
     }
 }
-
-
-
-

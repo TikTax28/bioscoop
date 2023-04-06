@@ -11,14 +11,18 @@ static class User
         WriteLine("Login");
         WriteLine("Vul uw emailadres in: ");
         string ?email = ReadLine();
-        WriteLine("Vul uw paswoord in: ");
+        WriteLine("Vul uw wachtwoord in: ");
         string ?password = ReadLine();
         AccountModel acc = accountsLogic.CheckLogin(email, password);
-        if (acc != null)
+        if (acc != null && acc.isAdmin == false)
         {            
             var temp = new CreateMenus();
             temp.LoggedInMenu();
-            
+        }
+        else if (acc != null && acc.isAdmin == true)
+        {            
+            var temp = new CreateMenus();
+            temp.AdminMenu();
         }
         else
         {
@@ -29,11 +33,11 @@ static class User
         }
     }
 
-    public static void AddAccToJson(string EmailAddress, string PassWord, string FullName)// gegevens toevoegen aan json lijst.
+    public static void AddAccToJson(string EmailAddress, string PassWord, string FullName, bool isAdmin)// gegevens toevoegen aan json lijst.
     {
         int _numberAccounts;
         _numberAccounts = accountsLogic._accounts.Count;
-        AccountModel NewUser = new AccountModel(_numberAccounts + 1, EmailAddress, PassWord, FullName);
+        AccountModel NewUser = new AccountModel(_numberAccounts + 1, EmailAddress, PassWord, FullName, isAdmin);
         accountsLogic.UpdateList(NewUser);
     }
 
@@ -129,9 +133,9 @@ static class User
                 WriteLine("Uw wachtwoord moet tekst bevatten, vul uw wachtwoord opnieuw in.");
             }
         }
-        AddAccToJson(EmailAddress, PassWord, FullName);
+        AddAccToJson(EmailAddress, PassWord, FullName, false);
         Clear();
-        AccountModel acc = accountsLogic.CheckLogin(EmailAddress, PassWord);
+        //AccountModel acc = accountsLogic.CheckLogin(EmailAddress, PassWord);
         var temp = new CreateMenus();
         temp.LoggedInMenu();
     }
