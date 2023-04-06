@@ -10,11 +10,5 @@
     "emailAddress": "abc",
     "password": "abc",
     "fullName": "abc"
-  },
-  {
-    "id": 3,
-    "emailAddress": "abc",
-    "password": "abc",
-    "fullName": "abc"
   }
 ]
