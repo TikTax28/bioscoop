@@ -26,7 +26,7 @@ static class User
         }
         else
         {
-            WriteLine("No account found with that email and password");
+            WriteLine("Geen account gevonden met die email en wachtwoord.");
             Clear();
             var temp = new CreateMenus();
             temp.LogIn();
@@ -135,7 +135,6 @@ static class User
         }
         AddAccToJson(EmailAddress, PassWord, FullName, false);
         Clear();
-        //AccountModel acc = accountsLogic.CheckLogin(EmailAddress, PassWord);
         var temp = new CreateMenus();
         temp.LoggedInMenu();
     }
