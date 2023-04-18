@@ -1,8 +1,10 @@
 using System.Text.Json.Serialization;
 
 
-class FilmModel
+public class FilmModel
 {
+    private static int _nextId;
+
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
@@ -15,13 +17,29 @@ class FilmModel
     [JsonPropertyName("filmTime")]
     public string filmTime { get; set; }
 
-    public FilmModel(int id, string filmname, string filmdate, string filmtime)
+    public FilmModel()
     {
-        Id = id;
+        Id = NextId();
+    }
+    
+    public FilmModel(string filmname, string filmdate, string filmtime)
+    {
+        Id = CurrentId;
         filmName = filmname;
         filmDate = filmdate;
         filmTime = filmtime;
+
+        _nextId = Id + 1;
+    }
+
+    private static int NextId()
+    {
+        return ++_nextId;
+    }
+
+    public static int CurrentId
+    {
+        get { return _nextId; }
+        set { _nextId = value; }
     }
 }
-
-
