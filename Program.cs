@@ -5,7 +5,7 @@ class Program
     public static void Main()
     {
         CreateMenus newStart = new CreateMenus();
-        newStart.AdminRemoveFilm();
-        //newStart.Begin();
+        //newStart.AdminRemoveFilm();
+        newStart.Begin();
     }
 }

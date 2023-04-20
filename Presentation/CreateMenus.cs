@@ -110,30 +110,29 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         FilmsLogic filmsLogic = new FilmsLogic();
         string[] options = new string[0];
 
-        foreach (FilmModel allFilms in filmsLogic.GetAllFilms())
+        foreach (FilmModel allFilms in filmsLogic.GetAllFilms()) // Loop door alle films in de database
         {
-            Array.Resize(ref options, options.Length + 1);
-            options[options.Length - 1] = allFilms.filmName;
+            Array.Resize(ref options, options.Length + 1); // Vergroot de grootte van de opties-array met 1
+            options[options.Length - 1] = allFilms.filmName; // Voeg de naam van de film toe aan de opties-array
         }
 
-        // Shift all elements one place to the right
         Array.Resize(ref options, options.Length + 1);
+        options[options.Length - 1] = "Terug"; // Voeg de "Terug" optie toe aan de opties-array
 
-        // Add "Terug" at the end
-        options[options.Length - 1] = "Terug";
-
-        HashSet<string> hashSet = new HashSet<string>(options);
-        options = hashSet.ToArray();
+        HashSet<string> hashSet = new HashSet<string>(options); // Verwijder dubbele opties uit de opties-array
+        options = hashSet.ToArray(); // Zet de opties-array om naar een HashSet en vervolgens terug naar een array
         Menu Films = new Menu(prompt, options);
-        int SelectedIndex = Films.Run();
-        if (SelectedIndex < options.Length - 1)
+        int SelectedIndex = Films.Run(); // Voer de menu uit en sla de geselecteerde index op
+        if (SelectedIndex < options.Length - 1) // Als de geselecteerde index niet de "Terug" optie is
         {
-            FilmTimes(options[SelectedIndex]);
+            FilmTimes(options[SelectedIndex]); // Roep de FilmTimes methode aan met de geselecteerde filmnaam
         }
         else
         {
-            LoggedInMenu();
+            LoggedInMenu(); // Ga terug naar het ingelogde menu
         }
+
+
     }
 
     private void FilmTimes(string filmName)
@@ -142,22 +141,20 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         FilmsLogic filmsLogic = new FilmsLogic();
         string prompt2 = "Kies een tijd en klik op ENTER";
 
-
-        // Create a dictionary that maps each date to a list of times for the selected film
-        Dictionary<string, List<string>> dateToTimes = new Dictionary<string, List<string>>();
+        
+        Dictionary<string, List<string>> dateToTimes = new Dictionary<string, List<string>>(); // Maak een dictionary om elke datum te koppelen aan een lijst met beschikbare tijden
         foreach (FilmModel film in filmsLogic.GetAllFilms())
         {
             if (film.filmName == filmName)
             {
-                if (!dateToTimes.ContainsKey(film.filmDate))
+                if (!dateToTimes.ContainsKey(film.filmDate)) // Als de datum nog niet aan het woordenboek is toegevoegd, voeg dan een nieuwe lege lijst toe
                 {
                     dateToTimes.Add(film.filmDate, new List<string>());
                 }
-                dateToTimes[film.filmDate].Add(film.filmTime);
+                dateToTimes[film.filmDate].Add(film.filmTime); // Voeg de tijd toe aan de lijst met tijden voor deze datum
             }
         }
 
-        // Create options array for the date menu
         string[] dateOptions = dateToTimes.Keys.ToArray();
         dateOptions = dateOptions.Append("Terug").ToArray();
 
@@ -167,7 +164,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
             if (selectedDateIndex >= 0 && selectedDateIndex < dateOptions.Length - 1)
             {
-                // Show time options for the selected date
+                // Toon het menu met tijdopties voor de geselecteerde datum
                 string selectedDate = dateOptions[selectedDateIndex];
                 List<string> timesForSelectedDate = dateToTimes[selectedDate];
                 int selectedTimeIndex = new Menu($"{selectedDate}\nKlik een tijd en klik op ENTER", timesForSelectedDate.ToArray()).Run() - 1; // subtract one to get index
@@ -180,7 +177,6 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 }
                 else
                 {
-                    // Invalid time index selected, go back to date selection
                     Console.WriteLine("Ongeldige keuze. Probeer opnieuw.");
                 }
             }
