@@ -52,17 +52,19 @@ class FilmsLogic
         _films.Remove(film);
         FilmsAccess.WriteAll(_films);
     }
-    public bool CheckFilm(string filmname, string filmdate, string filmtime)
+    public bool CheckFilmName(string filmname)
     {
-        DateTime date;
-        TimeSpan time;
-
         // check filmname character length
         if (filmname.Length > 50)
         {
             WriteLine("Film lengte moet minder dan 50 letters zijn!");
             return false;
         }
+        return true;
+    }
+    public bool CheckFilmDate(string filmdate)
+    {
+        DateTime date;
 
         // check if filmdate is the right format: DD-MM-YYYY
         bool isValidDate = DateTime.TryParseExact(filmdate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
@@ -72,6 +74,11 @@ class FilmsLogic
             WriteLine("Foute format! Gebruik de format: DD-MM-YYYY");
             return false;
         }
+        return true;
+    }
+    public bool CheckFilmTime(string filmtime)
+    {
+        TimeSpan time;
 
         // check if filmtime is the right format: HH:MM
         bool isValidTime = TimeSpan.TryParseExact(filmtime, "hh\\:mm", CultureInfo.InvariantCulture, out time);
