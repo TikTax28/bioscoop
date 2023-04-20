@@ -7,24 +7,17 @@
     "isAdmin": true
   },
   {
-    "id": 2,
-    "emailAddress": "abc@nl",
-    "password": "abc",
-    "fullName": "abc",
-    "isAdmin": false
-  },
-  {
     "id": 3,
-    "emailAddress": "hans@gmail",
-    "password": "abc",
-    "fullName": "hans",
+    "emailAddress": "test@test.nl",
+    "password": "yusuf",
+    "fullName": "tester",
     "isAdmin": false
   },
   {
     "id": 4,
-    "emailAddress": "yusuf@email.nl",
-    "password": "geheim",
-    "fullName": "Yusuf Strijder",
+    "emailAddress": "jasper@jasper.nl",
+    "password": "jasper123",
+    "fullName": "jasper",
     "isAdmin": false
   }
 ]

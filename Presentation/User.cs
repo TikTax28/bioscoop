@@ -32,15 +32,6 @@ static class User
             temp.LogIn();
         }
     }
-
-    public static void AddAccToJson(string EmailAddress, string PassWord, string FullName, bool isAdmin)// gegevens toevoegen aan json lijst.
-    {
-        int _numberAccounts;
-        _numberAccounts = accountsLogic._accounts.Count;
-        AccountModel NewUser = new AccountModel(_numberAccounts + 1, EmailAddress, PassWord, FullName, isAdmin);
-        accountsLogic.UpdateList(NewUser);
-    }
-
     public static void CreateAcc()
     {
         string ?FullName;
@@ -133,7 +124,7 @@ static class User
                 WriteLine("Uw wachtwoord moet tekst bevatten, vul uw wachtwoord opnieuw in.");
             }
         }
-        AddAccToJson(EmailAddress, PassWord, FullName, false);
+        accountsLogic.AddAccount(EmailAddress, PassWord, FullName, false);
         Clear();
         var temp = new CreateMenus();
         temp.LoggedInMenu();

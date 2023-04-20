@@ -8,7 +8,18 @@ static class AccountsAccess
     public static List<AccountModel> LoadAll()
     {
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<AccountModel>>(json);
+        List<AccountModel> accounts = JsonSerializer.Deserialize<List<AccountModel>>(json);
+        
+        if (accounts.Count > 0)
+        {
+            AccountModel.CurrentId = accounts.Max(f => f.Id) + 1;
+        }
+        else
+        {
+            AccountModel.CurrentId = 1;
+        }
+
+        return accounts;
     }
 
 
