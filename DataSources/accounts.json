@@ -19,5 +19,12 @@
     "password": "abc",
     "fullName": "hans",
     "isAdmin": false
+  },
+  {
+    "id": 4,
+    "emailAddress": "yusuf@email.nl",
+    "password": "geheim",
+    "fullName": "Yusuf Strijder",
+    "isAdmin": false
   }
 ]

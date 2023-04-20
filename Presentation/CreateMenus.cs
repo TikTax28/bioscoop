@@ -323,40 +323,44 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
     public void AdminAddFilm()
     {
         FilmsLogic filmslogic = new FilmsLogic();
+        Clear();
+        string ?filmname;
+        string ?filmdate;
+        string ?filmtime;
+        WriteLine("Voeg een film toe");
+        WriteLine();
+        while (true)
+            {
+            WriteLine("Filmnaam: ");
+            filmname = ReadLine();
+            if (filmslogic.CheckFilmName(filmname))
+            {
+                break;
+            }
+        }
         while (true)
         {
-            Clear();
-            WriteLine("Voeg een film toe");
-            WriteLine();
-            WriteLine("Filmnaam: ");
-            string ?filmname = ReadLine();
-            if (!filmslogic.CheckFilmName(filmname))
-            {
-                WriteLine("Probeer opnieuw. (Klik op een toets om opnieuw te proberen)");
-                ReadLine();
-                continue;
-            }
             WriteLine("Filmdatum: ");
-            string ?filmdate = ReadLine();
-            if (!filmslogic.CheckFilmDate(filmdate))
+            filmdate = ReadLine();
+            if (filmslogic.CheckFilmDate(filmdate))
             {
-                WriteLine("Probeer opnieuw. (Klik op een toets om opnieuw te proberen)");
-                ReadLine();
-                continue;
+                break;
             }
-            WriteLine("Filmtijd: ");
-            string ?filmtime = ReadLine();
-            if (!filmslogic.CheckFilmTime(filmtime))
-            {
-                WriteLine("Probeer opnieuw. (Klik op een toets om opnieuw te proberen)");
-                ReadLine();
-                continue;
-            }
-            filmslogic.AddFilm(filmname, filmdate, filmtime);
-            Clear();
-            var temp = new CreateMenus();
-            temp.FilmsAdmin();
         }
+        while (true)
+        {
+            WriteLine("Filmtijd: ");
+            filmtime = ReadLine();
+            if (filmslogic.CheckFilmTime(filmtime))
+            {
+                break;
+            }
+        }
+        filmslogic.AddFilm(filmname, filmdate, filmtime);
+        Clear();
+        var temp = new CreateMenus();
+        temp.FilmsAdmin();
+    
     }
 
     public void AdminRemoveFilm()
