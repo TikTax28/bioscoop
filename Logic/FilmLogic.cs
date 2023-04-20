@@ -54,6 +54,12 @@ class FilmsLogic
     }
     public bool CheckFilmName(string filmname)
     {
+        // check if filmname is empty
+        if (filmname == "")
+        {
+            WriteLine("Vul een naam in");
+            return false;
+        }
         // check filmname character length
         if (filmname.Length > 50)
         {
