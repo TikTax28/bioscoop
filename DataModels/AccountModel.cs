@@ -3,6 +3,8 @@
 
 class AccountModel
 {
+    private static int _nextId;
+
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
@@ -18,13 +20,29 @@ class AccountModel
     [JsonPropertyName("isAdmin")]
     public bool isAdmin { get; set; }
 
-    public AccountModel(int id, string emailAddress, string password, string fullName, bool isadmin)
+    public AccountModel()
     {
-        Id = id;
+        Id = NextId();
+    }
+    public AccountModel(string emailAddress, string password, string fullName, bool isadmin)
+    {
+        Id = CurrentId;
         EmailAddress = emailAddress;
         Password = password;
         FullName = fullName;
         isAdmin = isadmin;
+
+        _nextId = Id + 1;
+    }
+    private static int NextId()
+    {
+        return ++_nextId;
+    }
+
+    public static int CurrentId
+    {
+        get { return _nextId; }
+        set { _nextId = value; }
     }
 }
 

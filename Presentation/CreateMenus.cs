@@ -322,31 +322,45 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
     public void AdminAddFilm()
     {
+        FilmsLogic filmslogic = new FilmsLogic();
         Clear();
+        string ?filmname;
+        string ?filmdate;
+        string ?filmtime;
         WriteLine("Voeg een film toe");
         WriteLine();
-        WriteLine("Filmnaam: ");
-        string ?filmname = ReadLine();
-        WriteLine("Filmdatum: ");
-        string ?filmdate = ReadLine();
-        WriteLine("Filmtijd: ");
-        string ?filmtime = ReadLine();
-        FilmsLogic filmslogic = new FilmsLogic();
-        if (filmslogic.CheckFilm(filmname, filmdate, filmtime))
-        {
-            filmslogic.AddFilm(filmname, filmdate, filmtime);
-            Clear();
-            var temp = new CreateMenus();
-            temp.FilmsAdmin();
+        while (true)
+            {
+            WriteLine("Filmnaam: ");
+            filmname = ReadLine();
+            if (filmslogic.CheckFilmName(filmname))
+            {
+                break;
+            }
         }
-        else
+        while (true)
         {
-            WriteLine("Probeer opnieuw.");
-            ReadLine();
-            Clear();
-            var temp = new CreateMenus();
-            temp.FilmsAdmin();
+            WriteLine("Filmdatum: ");
+            filmdate = ReadLine();
+            if (filmslogic.CheckFilmDate(filmdate))
+            {
+                break;
+            }
         }
+        while (true)
+        {
+            WriteLine("Filmtijd: ");
+            filmtime = ReadLine();
+            if (filmslogic.CheckFilmTime(filmtime))
+            {
+                break;
+            }
+        }
+        filmslogic.AddFilm(filmname, filmdate, filmtime);
+        Clear();
+        var temp = new CreateMenus();
+        temp.FilmsAdmin();
+    
     }
 
     public void AdminRemoveFilm()

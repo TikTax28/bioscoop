@@ -21,14 +21,10 @@ static class FilmsAccess
         return films;
     }
 
-
     public static void WriteAll(List<FilmModel> films)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(films, options);
         File.WriteAllText(path, json);
     }
-
-
-
 }
