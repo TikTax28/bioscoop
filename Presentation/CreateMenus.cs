@@ -139,8 +139,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
     {
         Clear();
         FilmsLogic filmsLogic = new FilmsLogic();
-        string prompt2 = "Kies een tijd en klik op ENTER";
-
+        string prompt2 = filmName; //verander dit naar film.filmInfo, en voeg filmInfo toe aan de json
         
         Dictionary<string, List<string>> dateToTimes = new Dictionary<string, List<string>>(); // Maak een dictionary om elke datum te koppelen aan een lijst met beschikbare tijden
         foreach (FilmModel film in filmsLogic.GetAllFilms())
