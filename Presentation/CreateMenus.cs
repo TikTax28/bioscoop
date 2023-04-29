@@ -324,6 +324,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         FilmsLogic filmslogic = new FilmsLogic();
         Clear();
         string ?filmname;
+        string ?filmdescription;
         string ?filmdate;
         string ?filmtime;
         WriteLine("Voeg een film toe");
@@ -333,6 +334,12 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             WriteLine("Filmnaam: ");
             filmname = ReadLine();
             if (filmslogic.CheckFilmName(filmname)) break;
+        }
+        while (true)
+            {
+            WriteLine("Film beschrijving: ");
+            filmdescription = ReadLine();
+            if (filmslogic.CheckFilmDescription(filmdescription)) break;
         }
         while (true)
         {
@@ -346,7 +353,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             filmtime = ReadLine();
             if (filmslogic.CheckFilmTime(filmtime)) break;
         }
-        filmslogic.AddFilm(filmname, filmdate, filmtime);
+        filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime);
         Clear();
         var temp = new CreateMenus();
         temp.FilmsAdmin();

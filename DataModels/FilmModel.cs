@@ -11,6 +11,9 @@ public class FilmModel
     [JsonPropertyName("filmName")]
     public string filmName { get; set; }
 
+    [JsonPropertyName("filmDescription")]
+    public string filmDescription { get; set; }
+
     [JsonPropertyName("filmDate")]
     public string filmDate { get; set; }
 
@@ -22,10 +25,11 @@ public class FilmModel
         Id = NextId();
     }
     
-    public FilmModel(string filmname, string filmdate, string filmtime)
+    public FilmModel(string filmname, string filmdescription, string filmdate, string filmtime)
     {
         Id = CurrentId;
         filmName = filmname;
+        filmDescription = filmdescription;
         filmDate = filmdate;
         filmTime = filmtime;
 

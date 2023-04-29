@@ -68,6 +68,22 @@ class FilmsLogic
         }
         return true;
     }
+    public bool CheckFilmDescription(string filmdescription)
+    {
+        // check if filmname is empty
+        if (filmdescription == "")
+        {
+            WriteLine("Vul een beschrijving in");
+            return false;
+        }
+        // check filmname character length
+        if (filmdescription.Length > 200)
+        {
+            WriteLine("Film beschrijving mag niet te lang zijn!");
+            return false;
+        }
+        return true;
+    }
     public bool CheckFilmDate(string filmdate)
     {
         DateTime date;
@@ -96,9 +112,9 @@ class FilmsLogic
         }
         return true;
     }
-    public void AddFilm(string filmname, string filmdate, string filmtime)
+    public void AddFilm(string filmname, string filmdescription, string filmdate, string filmtime)
     {
-        FilmModel newFilm = new FilmModel(filmname, filmdate, filmtime);
+        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime);
         _films.Add(newFilm);
         FilmsAccess.WriteAll(_films);
     }
