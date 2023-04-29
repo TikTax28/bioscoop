@@ -332,28 +332,19 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             {
             WriteLine("Filmnaam: ");
             filmname = ReadLine();
-            if (filmslogic.CheckFilmName(filmname))
-            {
-                break;
-            }
+            if (filmslogic.CheckFilmName(filmname)) break;
         }
         while (true)
         {
             WriteLine("Filmdatum: ");
             filmdate = ReadLine();
-            if (filmslogic.CheckFilmDate(filmdate))
-            {
-                break;
-            }
+            if (filmslogic.CheckFilmDate(filmdate)) break;
         }
         while (true)
         {
             WriteLine("Filmtijd: ");
             filmtime = ReadLine();
-            if (filmslogic.CheckFilmTime(filmtime))
-            {
-                break;
-            }
+            if (filmslogic.CheckFilmTime(filmtime)) break;
         }
         filmslogic.AddFilm(filmname, filmdate, filmtime);
         Clear();
