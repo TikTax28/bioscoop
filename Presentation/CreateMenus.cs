@@ -353,6 +353,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             filmtime = ReadLine();
             if (filmslogic.CheckFilmTime(filmtime)) break;
         }
+        // Add the film
         filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime);
         Clear();
         var temp = new CreateMenus();
@@ -368,13 +369,14 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
         string[] options = new string[0];
 
+        // Get all the films
         foreach (FilmModel allFilms in filmsLogic.GetAllFilms())
         {
             Array.Resize(ref options, options.Length + 1);
             options[options.Length - 1] = allFilms.filmName;
         }
 
-        // Shift all elements one place to the right
+        // increse the array size
         Array.Resize(ref options, options.Length + 2);
         for (int i = options.Length - 2; i >= 0; i--)
         {
@@ -384,7 +386,9 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         // Add "Terug" at the end
         options[options.Length - 1] = "Terug";
 
+        // Remove the duplicates using hashset
         HashSet<string> hashSet = new HashSet<string>(options);
+        // Turn it back to an array
         options = hashSet.ToArray();
 
         Menu Films = new Menu(prompt, options);
@@ -402,8 +406,10 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             switch (SelectedIndex2)
             {
                 case 0:
+                        // Use the name of the selected option to get the film info
                         while (filmsLogic.GetByName(options[SelectedIndex]) != null)
                         {
+                            // Delete the film that is selected
                             filmsLogic.DeleteFilm(filmsLogic.GetByName(options[SelectedIndex]));
                         }
                         AdminRemoveFilm();
