@@ -5,7 +5,7 @@ class Program
     public static void Main()
     {
         CreateMenus newStart = new CreateMenus();
-        //newStart.AdminAddFilm();
-        newStart.Begin();
+        newStart.AdminMenu();
+        //newStart.Begin();
     }
 }

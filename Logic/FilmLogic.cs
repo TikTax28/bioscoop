@@ -112,9 +112,28 @@ class FilmsLogic
         }
         return true;
     }
-    public void AddFilm(string filmname, string filmdescription, string filmdate, string filmtime)
+    public bool CheckFilmRoom(string filmroom)
     {
-        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime);
+        // check if filmname is empty
+        if (filmroom == "")
+        {
+            WriteLine("Vul een filmzaal in");
+            return false;
+        }
+        // check filmname character length
+        if (filmroom == "1" || filmroom == "2" || filmroom == "3")
+        {
+            return true;
+        }
+        else
+        {
+            WriteLine("Je moet een geldige zaal kiezen!");
+        }
+        return false;
+    }
+    public void AddFilm(string filmname, string filmdescription, string filmdate, string filmtime, string filmroom)
+    {
+        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime, filmroom);
         _films.Add(newFilm);
         FilmsAccess.WriteAll(_films);
     }

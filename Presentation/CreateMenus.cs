@@ -323,10 +323,13 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
     {
         FilmsLogic filmslogic = new FilmsLogic();
         Clear();
+
         string ?filmname;
         string ?filmdescription;
         string ?filmdate;
         string ?filmtime;
+        string ?filmroom;
+
         WriteLine("Voeg een film toe");
         WriteLine();
         while (true)
@@ -353,8 +356,33 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             filmtime = ReadLine();
             if (filmslogic.CheckFilmTime(filmtime)) break;
         }
+        WriteLine();
+        while (true)
+        {
+            string prompt = "Kies een filmzaal: ";
+            // There are only 3 rooms available
+            string[] options = {"Zaal 1 (150 stoelen)", "Zaal 2 (300 stoelen)", "Zaal 3 (500 stoelen)"};
+            Menu Films = new Menu(prompt, options);
+            int SelectedIndex = Films.Run();
+            switch (SelectedIndex)
+            {
+                case 0:
+                    filmroom = "1";
+                    break;
+                case 1:
+                    filmroom = "2";
+                    break;
+                case 2:
+                    filmroom = "3";
+                    break;
+                default:
+                    filmroom = "";
+                    break;
+            }
+            if (filmslogic.CheckFilmRoom(filmroom)) break;
+        }
         // Add the film
-        filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime);
+        filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
         Clear();
         var temp = new CreateMenus();
         temp.FilmsAdmin();
