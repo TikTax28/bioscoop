@@ -4,7 +4,7 @@
     "filmName": "test1",
     "filmDescription": "Dit is test1",
     "filmDate": "12-12-2003",
-    "filmTime": "12:12",
+    "filmTime": "12:00",
     "filmRoom": "1"
   },
   {
@@ -14,5 +14,13 @@
     "filmDate": "17-12-2005",
     "filmTime": "21:12",
     "filmRoom": "2"
+  },
+  {
+    "id": 3,
+    "filmName": "test1",
+    "filmDescription": "Dit is test3",
+    "filmDate": "12-12-2003",
+    "filmTime": "12:30",
+    "filmRoom": "1"
   }
 ]

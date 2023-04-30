@@ -193,6 +193,118 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
     }
 
+    public void FilmSeats()
+    {
+        Clear();
+        bool running = true;
+        int currentRow = 0;
+        int currentColumn = 0;
+        int numRows = 10;
+        int numColumns = 10;
+
+        // Initialize unreserved seats
+        bool[,] seats = new bool[numRows, numColumns];
+
+        // Use list to keep track of the seats reserved
+        List<string> reservedSeats = new List<string>();
+
+        while (running) {
+            Clear();
+            WriteLine("Selecteer een stoel (gebruik de pijltjestoetsen om te bewegen, spatiebalk om te reserveren of Esc om te verlaten):");
+            WriteLine();
+
+            for (int row = 0; row < numRows; row++)
+            {
+                for (int col = 0; col < numColumns; col++)
+                {
+                    if (row == currentRow && col == currentColumn)
+                    {
+                        ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (seats[row, col])
+                    {
+                        ForegroundColor = ConsoleColor.Red;
+                    }
+                    else
+                    {
+                        ForegroundColor = ConsoleColor.White;
+                    }
+
+                    string seatNumber = "";
+
+                    // Calculate seat number based on row and column
+                    if (col < 9)
+                    {
+                        seatNumber += (char)('A' + row);
+                        seatNumber += (col + 1).ToString();
+                    }
+                    else
+                    {
+                        seatNumber += (char)('A' + row + 1);
+                        seatNumber += (col - 8).ToString();
+                    }
+
+                    Write((seats[row, col]) ? seatNumber + " " : seatNumber + " ");
+                }
+                WriteLine();
+            }
+            WriteLine();
+            // Print out reserved seats
+            WriteLine($"Gereserveerde stoelen: {string.Join(", ", reservedSeats)}");
+
+            ConsoleKeyInfo keyInfo = ReadKey(true);
+
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    currentRow = Math.Max(0, currentRow - 1);
+                    break;
+                case ConsoleKey.DownArrow:
+                    currentRow = Math.Min(numRows - 1, currentRow + 1);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    currentColumn = Math.Max(0, currentColumn - 1);
+                    break;
+                case ConsoleKey.RightArrow:
+                    currentColumn = Math.Min(numColumns - 1, currentColumn + 1);
+                    break;
+                case ConsoleKey.Spacebar:
+                    if (!seats[currentRow, currentColumn])
+                    {
+                        seats[currentRow, currentColumn] = true;
+                        ForegroundColor = ConsoleColor.White;
+
+                        string reservedSeat = "";
+
+                        // Calculate reserved seat number based on row and column
+                        if (currentColumn < 9)
+                        {
+                            reservedSeat += (char)('A' + currentRow);
+                            reservedSeat += (currentColumn + 1).ToString();
+                        }
+                        else
+                        {
+                            reservedSeat += (char)('A' + currentRow + 1);
+                            reservedSeat += (currentColumn - 8).ToString();
+                        }
+
+                        reservedSeats.Add(reservedSeat);
+
+                        WriteLine($"Stoel {reservedSeat} gereserveerd.");
+                    }
+                    else
+                    {
+                        WriteLine($"Stoel al gereserveerd.");
+                    }
+                    break;
+                case ConsoleKey.Escape:
+                    WriteLine("Verlaten...");
+                    running = false;
+                    break;
+            }
+            WriteLine();
+        }
+    }
 
     private void Reservations()
     {
