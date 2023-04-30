@@ -294,7 +294,24 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                     }
                     else
                     {
-                        WriteLine($"Stoel al gereserveerd.");
+                        seats[currentRow, currentColumn] = false;
+                        ForegroundColor = ConsoleColor.White;
+
+                        string reservedSeat = "";
+
+                        // Calculate reserved seat number based on row and column
+                        if (currentColumn < 9)
+                        {
+                            reservedSeat += (char)('A' + currentRow);
+                            reservedSeat += (currentColumn + 1).ToString();
+                        }
+                        else
+                        {
+                            reservedSeat += (char)('A' + currentRow + 1);
+                            reservedSeat += (currentColumn - 8).ToString();
+                        }
+
+                        reservedSeats.Remove(reservedSeat);
                     }
                     break;
                 case ConsoleKey.Escape:
