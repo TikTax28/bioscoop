@@ -193,6 +193,135 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
     }
 
+    public void FilmSeats()
+    {
+        Clear();
+        bool running = true;
+        int currentRow = 0;
+        int currentColumn = 0;
+        int numRows = 10;
+        int numColumns = 10;
+
+        // Initialize unreserved seats
+        bool[,] seats = new bool[numRows, numColumns];
+
+        // Use list to keep track of the seats reserved
+        List<string> reservedSeats = new List<string>();
+
+        while (running) {
+            Clear();
+            WriteLine("Selecteer een stoel (gebruik de pijltjestoetsen om te bewegen, spatiebalk om te reserveren of Esc om te verlaten):");
+            WriteLine();
+
+            for (int row = 0; row < numRows; row++)
+            {
+                for (int col = 0; col < numColumns; col++)
+                {
+                    if (row == currentRow && col == currentColumn)
+                    {
+                        ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (seats[row, col])
+                    {
+                        ForegroundColor = ConsoleColor.Red;
+                    }
+                    else
+                    {
+                        ForegroundColor = ConsoleColor.White;
+                    }
+
+                    string seatNumber = "";
+
+                    // Calculate seat number based on row and column
+                    if (col < 9)
+                    {
+                        seatNumber += (char)('A' + row);
+                        seatNumber += (col + 1).ToString();
+                    }
+                    else
+                    {
+                        seatNumber += (char)('A' + row + 1);
+                        seatNumber += (col - 8).ToString();
+                    }
+
+                    Write((seats[row, col]) ? seatNumber + " " : seatNumber + " ");
+                }
+                WriteLine();
+            }
+            WriteLine();
+            // Print out reserved seats
+            WriteLine($"Gereserveerde stoelen: {string.Join(", ", reservedSeats)}");
+
+            ConsoleKeyInfo keyInfo = ReadKey(true);
+
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    currentRow = Math.Max(0, currentRow - 1);
+                    break;
+                case ConsoleKey.DownArrow:
+                    currentRow = Math.Min(numRows - 1, currentRow + 1);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    currentColumn = Math.Max(0, currentColumn - 1);
+                    break;
+                case ConsoleKey.RightArrow:
+                    currentColumn = Math.Min(numColumns - 1, currentColumn + 1);
+                    break;
+                case ConsoleKey.Spacebar:
+                    if (!seats[currentRow, currentColumn])
+                    {
+                        seats[currentRow, currentColumn] = true;
+                        ForegroundColor = ConsoleColor.White;
+
+                        string reservedSeat = "";
+
+                        // Calculate reserved seat number based on row and column
+                        if (currentColumn < 9)
+                        {
+                            reservedSeat += (char)('A' + currentRow);
+                            reservedSeat += (currentColumn + 1).ToString();
+                        }
+                        else
+                        {
+                            reservedSeat += (char)('A' + currentRow + 1);
+                            reservedSeat += (currentColumn - 8).ToString();
+                        }
+
+                        reservedSeats.Add(reservedSeat);
+
+                        WriteLine($"Stoel {reservedSeat} gereserveerd.");
+                    }
+                    else
+                    {
+                        seats[currentRow, currentColumn] = false;
+                        ForegroundColor = ConsoleColor.White;
+
+                        string reservedSeat = "";
+
+                        // Calculate reserved seat number based on row and column
+                        if (currentColumn < 9)
+                        {
+                            reservedSeat += (char)('A' + currentRow);
+                            reservedSeat += (currentColumn + 1).ToString();
+                        }
+                        else
+                        {
+                            reservedSeat += (char)('A' + currentRow + 1);
+                            reservedSeat += (currentColumn - 8).ToString();
+                        }
+
+                        reservedSeats.Remove(reservedSeat);
+                    }
+                    break;
+                case ConsoleKey.Escape:
+                    WriteLine("Verlaten...");
+                    running = false;
+                    break;
+            }
+            WriteLine();
+        }
+    }
 
     private void Reservations()
     {
@@ -323,39 +452,66 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
     {
         FilmsLogic filmslogic = new FilmsLogic();
         Clear();
+
         string ?filmname;
+        string ?filmdescription;
         string ?filmdate;
         string ?filmtime;
+        string ?filmroom;
+
         WriteLine("Voeg een film toe");
         WriteLine();
         while (true)
             {
             WriteLine("Filmnaam: ");
             filmname = ReadLine();
-            if (filmslogic.CheckFilmName(filmname))
+            if (filmslogic.CheckFilmName(filmname)) break;
+        }
+        while (true)
             {
-                break;
-            }
+            WriteLine("Film beschrijving: ");
+            filmdescription = ReadLine();
+            if (filmslogic.CheckFilmDescription(filmdescription)) break;
         }
         while (true)
         {
             WriteLine("Filmdatum: ");
             filmdate = ReadLine();
-            if (filmslogic.CheckFilmDate(filmdate))
-            {
-                break;
-            }
+            if (filmslogic.CheckFilmDate(filmdate)) break;
         }
         while (true)
         {
             WriteLine("Filmtijd: ");
             filmtime = ReadLine();
-            if (filmslogic.CheckFilmTime(filmtime))
-            {
-                break;
-            }
+            if (filmslogic.CheckFilmTime(filmtime)) break;
         }
-        filmslogic.AddFilm(filmname, filmdate, filmtime);
+        WriteLine();
+        while (true)
+        {
+            string prompt = "Kies een filmzaal: ";
+            // There are only 3 rooms available
+            string[] options = {"Zaal 1 (150 stoelen)", "Zaal 2 (300 stoelen)", "Zaal 3 (500 stoelen)"};
+            Menu Films = new Menu(prompt, options);
+            int SelectedIndex = Films.Run();
+            switch (SelectedIndex)
+            {
+                case 0:
+                    filmroom = "1";
+                    break;
+                case 1:
+                    filmroom = "2";
+                    break;
+                case 2:
+                    filmroom = "3";
+                    break;
+                default:
+                    filmroom = "";
+                    break;
+            }
+            if (filmslogic.CheckFilmRoom(filmroom)) break;
+        }
+        // Add the film
+        filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
         Clear();
         var temp = new CreateMenus();
         temp.FilmsAdmin();
@@ -370,13 +526,14 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
         string[] options = new string[0];
 
+        // Get all the films
         foreach (FilmModel allFilms in filmsLogic.GetAllFilms())
         {
             Array.Resize(ref options, options.Length + 1);
             options[options.Length - 1] = allFilms.filmName;
         }
 
-        // Shift all elements one place to the right
+        // increse the array size
         Array.Resize(ref options, options.Length + 2);
         for (int i = options.Length - 2; i >= 0; i--)
         {
@@ -386,7 +543,9 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         // Add "Terug" at the end
         options[options.Length - 1] = "Terug";
 
+        // Remove the duplicates using hashset
         HashSet<string> hashSet = new HashSet<string>(options);
+        // Turn it back to an array
         options = hashSet.ToArray();
 
         Menu Films = new Menu(prompt, options);
@@ -404,8 +563,10 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             switch (SelectedIndex2)
             {
                 case 0:
+                        // Use the name of the selected option to get the film info
                         while (filmsLogic.GetByName(options[SelectedIndex]) != null)
                         {
+                            // Delete the film that is selected
                             filmsLogic.DeleteFilm(filmsLogic.GetByName(options[SelectedIndex]));
                         }
                         AdminRemoveFilm();
