@@ -97,6 +97,31 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         }
     }
 
+    private void Guest()
+    {
+        string prompt = @"Welkom bij het bioscoopreserveringssysteem!
+Met dit reserveringssysteem kunt u door de nieuwste filmlijsten bladeren, 
+uw gewenste films, data, tijden en stoelen selecteren en een reservering maken. 
+De kaart(en) en de factuur worden na de betaling per email naar u verzonden.
+Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
+
+        string[] options = {"Films", "Terug"};
+        Menu logMenu = new Menu(prompt, options);
+        int SelectedIndex = logMenu.Run();
+
+        switch (SelectedIndex)
+        {
+            case 0:
+                FilmMenu();
+                break;
+            case 1:
+                MainMenu();
+                break;
+            default:
+                break;
+        }
+    }
+
     private void LogOut()
     {
         Clear();
@@ -108,12 +133,13 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         Clear();
         string prompt = "Selecter een film en klik op ENTER";
         FilmsLogic filmsLogic = new FilmsLogic();
+        var allFilms = filmsLogic.GetAllFilms();
         string[] options = new string[0];
 
-        foreach (FilmModel allFilms in filmsLogic.GetAllFilms()) // Loop door alle films in de database
+        foreach (FilmModel film in allFilms) // Loop door alle films in de database
         {
             Array.Resize(ref options, options.Length + 1); // Vergroot de grootte van de opties-array met 1
-            options[options.Length - 1] = allFilms.filmName; // Voeg de naam van de film toe aan de opties-array
+            options[options.Length - 1] = film.filmName; // Voeg de naam van de film toe aan de opties-array
         }
 
         Array.Resize(ref options, options.Length + 1);
@@ -125,7 +151,8 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         int SelectedIndex = Films.Run(); // Voer de menu uit en sla de geselecteerde index op
         if (SelectedIndex < options.Length - 1) // Als de geselecteerde index niet de "Terug" optie is
         {
-            FilmTimes(options[SelectedIndex]); // Roep de FilmTimes methode aan met de geselecteerde filmnaam
+            FilmModel selectedFilm = allFilms.First(f => f.filmName == options[SelectedIndex]);
+            FilmTimes(selectedFilm); // Roep de FilmTimes methode aan met de geselecteerde filmnaam
         }
         else
         {
@@ -135,16 +162,16 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
     }
 
-    private void FilmTimes(string filmName)
+    private void FilmTimes(FilmModel selectedFilm)
     {
         Clear();
         FilmsLogic filmsLogic = new FilmsLogic();
-        string prompt2 = filmName; //verander dit naar film.filmInfo, en voeg filmInfo toe aan de json
+        string prompt2 = selectedFilm.filmDescription;
         
         Dictionary<string, List<string>> dateToTimes = new Dictionary<string, List<string>>(); // Maak een dictionary om elke datum te koppelen aan een lijst met beschikbare tijden
         foreach (FilmModel film in filmsLogic.GetAllFilms())
         {
-            if (film.filmName == filmName)
+            if (film.filmName == selectedFilm.filmName)
             {
                 if (!dateToTimes.ContainsKey(film.filmDate)) // Als de datum nog niet aan het woordenboek is toegevoegd, voeg dan een nieuwe lege lijst toe
                 {
@@ -327,31 +354,6 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
     {
         Clear();
         WriteLine("Geen reserveringen");
-    }
-
-    private void Guest()
-    {
-        string prompt = @"Welkom bij het bioscoopreserveringssysteem!
-Met dit reserveringssysteem kunt u door de nieuwste filmlijsten bladeren, 
-uw gewenste films, data, tijden en stoelen selecteren en een reservering maken. 
-De kaart(en) en de factuur worden na de betaling per email naar u verzonden.
-Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
-
-        string[] options = {"Films", "Terug"};
-        Menu logMenu = new Menu(prompt, options);
-        int SelectedIndex = logMenu.Run();
-
-        switch (SelectedIndex)
-        {
-            case 0:
-                FilmMenu();
-                break;
-            case 1:
-                MainMenu();
-                break;
-            default:
-                break;
-        }
     }
 
 

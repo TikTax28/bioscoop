@@ -6,7 +6,7 @@ class Program
     {
         CreateMenus newStart = new CreateMenus();
         //newStart.AdminMenu();
-        //newStart.Begin();
-        newStart.FilmSeats();
+        newStart.Begin();
+        //newStart.FilmSeats();
     }
 }
