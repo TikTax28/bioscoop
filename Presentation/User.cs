@@ -21,7 +21,7 @@ static class User
         }
         else if (acc != null && acc.isAdmin == true)
         {            
-            var temp = new CreateMenus();
+            var temp = new AdminMenus();
             temp.AdminMenu();
         }
         else
