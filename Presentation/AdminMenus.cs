@@ -127,6 +127,8 @@ class AdminMenus
         }
         // Add the film
         filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        //Functie aanroepen die alles logged wat er gebeurd.
+        AdminLogger.LogAdminAddFilm(filmname, filmdate, filmtime);
         Clear();
         var temp = new CreateMenus();
         FilmsAdmin();
@@ -181,8 +183,11 @@ class AdminMenus
                         // Use the name of the selected option to get the film info
                         while (filmsLogic.GetByName(options[SelectedIndex]) != null)
                         {
-                            // Delete the film that is selected
-                            filmsLogic.DeleteFilm(filmsLogic.GetByName(options[SelectedIndex]));
+                            FilmModel filmToDelete = filmsLogic.GetByName(options[SelectedIndex]);
+                            string filmToDeleteForLog = filmToDelete.filmName;
+                            filmsLogic.DeleteFilm(filmToDelete);
+                            //Functie aanroepen die alles logged wat er gebeurd.
+                            AdminLogger.LogAdminRemoveFilm(filmToDeleteForLog);
                         }
                         AdminRemoveFilm();
                         break;
