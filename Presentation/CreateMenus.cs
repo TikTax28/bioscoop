@@ -356,6 +356,8 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             }
         }
         filmslogic.AddFilm(filmname, filmdate, filmtime);
+        //Functie aanroepen die alles logged wat er gebeurd.
+        AdminLogger.LogAdminAddFilm(filmname, filmdate, filmtime);
         Clear();
         var temp = new CreateMenus();
         temp.FilmsAdmin();
@@ -395,7 +397,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         if (SelectedIndex < options.Length - 1)
         {
             Clear();
-            prompt = @"Weet je zeker dat je wilt verwijderen?";
+            prompt = @"Weet je zeker dat je deze film wilt verwijderen?";
 
             string[] options2 = {"Ja", "Nee, ga terug"};
             Menu menu = new Menu(prompt, options2);
@@ -406,7 +408,11 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 case 0:
                         while (filmsLogic.GetByName(options[SelectedIndex]) != null)
                         {
-                            filmsLogic.DeleteFilm(filmsLogic.GetByName(options[SelectedIndex]));
+                            FilmModel filmToDelete = filmsLogic.GetByName(options[SelectedIndex]);
+                            string filmToDeleteForLog = filmToDelete.filmName;
+                            filmsLogic.DeleteFilm(filmToDelete);
+                            //Functie aanroepen die alles logged wat er gebeurd.
+                            AdminLogger.LogAdminRemoveFilm(filmToDeleteForLog);
                         }
                         AdminRemoveFilm();
                         break;
@@ -428,7 +434,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         
     }
 
-     private void SeatsAdmin()
+    private void SeatsAdmin()
     {
         
     }
