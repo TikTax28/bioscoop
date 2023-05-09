@@ -2,11 +2,11 @@ static class AdminLogger
 {
     static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/adminLog.csv"));
 
-    public static void LogAdminAddFilm(string filmname, string filmdate, string filmtime)
+    public static void LogAdminAddFilm(string filmname, string filmdate, string filmtime, string filmroom)
     {
         // Neerzetten wat er precies gelogd moet worden.
         string Adminname = AccountsLogic.CurrentAccount.FullName;
-        string data = $"Admin {Adminname} heeft een film toegevoegd met als naam: {filmname}, datum: {filmdate} en als tijd: {filmtime}.";
+        string data = $"Admin {Adminname} heeft een film toegevoegd met als naam: {filmname}, datum: {filmdate}, tijd: {filmtime} en in zaal: {filmroom}.";
 
         using (StreamWriter writer = new StreamWriter(path, true))
         {

@@ -128,7 +128,7 @@ class AdminMenus
         // Add the film
         filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
         //Functie aanroepen die alles logged wat er gebeurd.
-        AdminLogger.LogAdminAddFilm(filmname, filmdate, filmtime);
+        AdminLogger.LogAdminAddFilm(filmname, filmdate, filmtime, filmroom);
         Clear();
         var temp = new CreateMenus();
         FilmsAdmin();
