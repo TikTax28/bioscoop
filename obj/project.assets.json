@@ -55,32 +55,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yusuf\\.nuget\\packages\\": {}
+    "C:\\Users\\nbjja\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\herot\\OneDrive\\Bureaublad\\C#\\bios\\bioscoop-1\\Project.csproj",
+      "projectUniqueName": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\C#\\bios\\bioscoop-1\\Project.csproj",
-      "packagesPath": "C:\\Users\\herot\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\C#\\bios\\bioscoop-1\\obj\\",
-=======
-      "projectUniqueName": "G:\\Mijn Drive\\Hogeschool jaar 1\\Project B\\new-bioscoop-main\\bioscoop\\Project.csproj",
-      "projectName": "Project",
-      "projectPath": "G:\\Mijn Drive\\Hogeschool jaar 1\\Project B\\new-bioscoop-main\\bioscoop\\Project.csproj",
-      "packagesPath": "C:\\Users\\yusuf\\.nuget\\packages\\",
-      "outputPath": "G:\\Mijn Drive\\Hogeschool jaar 1\\Project B\\new-bioscoop-main\\bioscoop\\obj\\",
->>>>>>> 462b19defcda57667559413083b518947f8a9db1
+      "projectPath": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj",
+      "packagesPath": "C:\\Users\\nbjja\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\yusuf\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\nbjja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -120,8 +119,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
