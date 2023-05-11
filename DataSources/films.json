@@ -1,26 +1,34 @@
 [
   {
+    "id": 1,
+    "filmName": "test1",
+    "filmDescription": "test555",
+    "filmDate": "12-12-2003",
+    "filmTime": "12:00",
+    "filmRoom": "1"
+  },
+  {
     "id": 2,
-    "filmName": "Roadblock",
-    "filmDate": "29-3-2023",
-    "filmTime": "13:45"
+    "filmName": "test2",
+    "filmDescription": "Dit is test2",
+    "filmDate": "17-12-2005",
+    "filmTime": "21:12",
+    "filmRoom": "2"
   },
   {
     "id": 3,
-    "filmName": "The Maze Runner",
-    "filmDate": "30-3-2023",
-    "filmTime": "13:15"
+    "filmName": "test1",
+    "filmDescription": "Dit is test3",
+    "filmDate": "12-12-2003",
+    "filmTime": "12:30",
+    "filmRoom": "1"
   },
   {
     "id": 4,
-    "filmName": "Zombie Apocalypse",
-    "filmDate": "31-3-2023",
-    "filmTime": "13:30"
-  },
-  {
-    "id": 5,
-    "filmName": "Zombie Apocalypse",
-    "filmDate": "31-3-2023",
-    "filmTime": "14:30"
+    "filmName": "abcc",
+    "filmDescription": "abcd",
+    "filmDate": "29-02-2024",
+    "filmTime": "13:13",
+    "filmRoom": "1"
   }
 ]

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using static System.Console;
 using System.IO;
 using System.Text.Json;
 
@@ -48,6 +50,91 @@ class FilmsLogic
     public void DeleteFilm(FilmModel film)
     {
         _films.Remove(film);
+        FilmsAccess.WriteAll(_films);
+    }
+    public bool CheckFilmName(string filmname)
+    {
+        // check if filmname is empty
+        if (filmname == "")
+        {
+            WriteLine("Vul een naam in");
+            return false;
+        }
+        // check filmname character length
+        if (filmname.Length > 50)
+        {
+            WriteLine("Film lengte moet minder dan 50 letters zijn!");
+            return false;
+        }
+        return true;
+    }
+    public bool CheckFilmDescription(string filmdescription)
+    {
+        // check if filmname is empty
+        if (filmdescription == "")
+        {
+            WriteLine("Vul een beschrijving in");
+            return false;
+        }
+        // check filmname character length
+        if (filmdescription.Length > 200)
+        {
+            WriteLine("Film beschrijving mag niet langer dan 200 karakters zijn zijn!");
+            return false;
+        }
+        return true;
+    }
+    public bool CheckFilmDate(string filmdate)
+    {
+        DateTime date;
+
+        // check if filmdate is the right format: DD-MM-YYYY
+        bool isValidDate = DateTime.TryParseExact(filmdate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+        if (!isValidDate)
+        {
+            WriteLine("Vul een geldige datum in. (DD-MM-YYYY)");
+            return false;
+        }
+        return true;
+    }
+    public bool CheckFilmTime(string filmtime)
+    {
+        TimeSpan time;
+
+        // check if filmtime is the right format: HH:MM
+        bool isValidTime = TimeSpan.TryParseExact(filmtime, "hh\\:mm", CultureInfo.InvariantCulture, out time);
+
+        if (!isValidTime)
+        {
+            WriteLine("Vul een geldige tijd in. (HH:MM)");
+            return false;
+        }
+        return true;
+    }
+    public bool CheckFilmRoom(string filmroom)
+    {
+        // check if filmname is empty
+        if (filmroom == "")
+        {
+            WriteLine("Vul een filmzaal in");
+            return false;
+        }
+        // check filmname character length
+        if (filmroom == "1" || filmroom == "2" || filmroom == "3")
+        {
+            return true;
+        }
+        else
+        {
+            WriteLine("Je moet een geldige zaal kiezen!");
+        }
+        return false;
+    }
+    public void AddFilm(string filmname, string filmdescription, string filmdate, string filmtime, string filmroom)
+    {
+        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime, filmroom);
+        _films.Add(newFilm);
         FilmsAccess.WriteAll(_films);
     }
 }

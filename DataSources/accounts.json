@@ -1,14 +1,30 @@
 [
   {
     "id": 1,
-    "emailAddress": "tom",
+    "emailAddress": "tom@nl",
     "password": "tom",
-    "fullName": "Tom Tom"
+    "fullName": "Tom Tom",
+    "isAdmin": true
   },
   {
-    "id": 2,
-    "emailAddress": "abc",
-    "password": "abc",
-    "fullName": "abc"
+    "id": 3,
+    "emailAddress": "test@test.nl",
+    "password": "yusuf",
+    "fullName": "tester",
+    "isAdmin": false
+  },
+  {
+    "id": 4,
+    "emailAddress": "jasper@jasper.nl",
+    "password": "jasper123",
+    "fullName": "jasper",
+    "isAdmin": false
+  },
+  {
+    "id": 5,
+    "emailAddress": "test@nl",
+    "password": "test",
+    "fullName": "kuku",
+    "isAdmin": false
   }
 ]

@@ -11,32 +11,27 @@ static class User
         WriteLine("Login");
         WriteLine("Vul uw emailadres in: ");
         string ?email = ReadLine();
-        WriteLine("Vul uw paswoord in: ");
+        WriteLine("Vul uw wachtwoord in: ");
         string ?password = ReadLine();
         AccountModel acc = accountsLogic.CheckLogin(email, password);
-        if (acc != null)
+        if (acc != null && acc.isAdmin == false)
         {            
             var temp = new CreateMenus();
             temp.LoggedInMenu();
-            
+        }
+        else if (acc != null && acc.isAdmin == true)
+        {            
+            var temp = new AdminMenus();
+            temp.AdminMenu();
         }
         else
         {
-            WriteLine("No account found with that email and password");
+            WriteLine("Geen account gevonden met die email en wachtwoord.");
             Clear();
             var temp = new CreateMenus();
             temp.LogIn();
         }
     }
-
-    public static void AddAccToJson(string EmailAddress, string PassWord, string FullName)// gegevens toevoegen aan json lijst.
-    {
-        int _numberAccounts;
-        _numberAccounts = accountsLogic._accounts.Count;
-        AccountModel NewUser = new AccountModel(_numberAccounts + 1, EmailAddress, PassWord, FullName);
-        accountsLogic.UpdateList(NewUser);
-    }
-
     public static void CreateAcc()
     {
         string ?FullName;
@@ -129,9 +124,8 @@ static class User
                 WriteLine("Uw wachtwoord moet tekst bevatten, vul uw wachtwoord opnieuw in.");
             }
         }
-        AddAccToJson(EmailAddress, PassWord, FullName);
+        accountsLogic.AddAccount(EmailAddress, PassWord, FullName, false);
         Clear();
-        AccountModel acc = accountsLogic.CheckLogin(EmailAddress, PassWord);
         var temp = new CreateMenus();
         temp.LoggedInMenu();
     }

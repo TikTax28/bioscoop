@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop\\bioscoop\\Project.csproj": {}
+    "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop\\bioscoop\\Project.csproj": {
+    "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop\\bioscoop\\Project.csproj",
+        "projectUniqueName": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop\\bioscoop\\Project.csproj",
-        "packagesPath": "C:\\Users\\herot\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop\\bioscoop\\obj\\",
+        "projectPath": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj",
+        "packagesPath": "C:\\Users\\nbjja\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\herot\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\nbjja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

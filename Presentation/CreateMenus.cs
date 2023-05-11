@@ -5,6 +5,10 @@ using static System.Console;
 
 class CreateMenus
 {
+    AdminMenus admin = new AdminMenus();
+    FilmMenus films = new FilmMenus();
+    
+
     public void Begin()
     {
         MainMenu();
@@ -81,7 +85,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         switch (SelectedIndex)
         {
             case 0:
-                FilmMenu();
+                films.FilmMenu();
                 break;
             case 1:
                 Reservations();
@@ -95,45 +99,6 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             default:
                 break;
         }
-    }
-
-    private void LogOut()
-    {
-        Clear();
-        MainMenu();
-    }
-
-    private void FilmMenu()
-    {
-        string prompt = "Selecter een film en klik op ENTER om te bevestigen";
-
-        string[] options = {"Film1", "...", "...", "Terug"};
-        Menu Films = new Menu(prompt, options);
-        int SelectedIndex = Films.Run();
-
-        switch (SelectedIndex)
-        {
-            case 0:
-                Film1();
-                break;
-            case 1:
-                Film1();
-                break;
-            case 2:
-                Film1();
-                break;
-            case 3:
-                LoggedInMenu();
-                break;
-            default:
-                break;
-}
-    }
-
-    private void Reservations()
-    {
-        Clear();
-        WriteLine("Geen reserveringen");
     }
 
     private void Guest()
@@ -151,42 +116,30 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         switch (SelectedIndex)
         {
             case 0:
-                FilmMenu();
+                films.FilmMenu();
                 break;
             case 1:
                 MainMenu();
                 break;
             default:
                 break;
-}
-    }
-
-    public void Film1()
-    {
-        string prompt = @"Cocain Bear";
-
-        string[] options = {"Cocain Bear is gebaseerd op een waargebeurd verhaal uit 1985 over een drugssmokkelaar, wiens vliegtuig neerstort, en de zwarte beer die de zoekgeraakte cocaïne verorbert.", "Verder", "Terug"};
-        Menu logMenu = new Menu(prompt, options);
-        int SelectedIndex = logMenu.Run();
-
-        switch (SelectedIndex)
-        {
-            case 0:
-                Clear();
-                Film1();
-                break;
-            case 1:
-                Clear();
-                Snacks();
-                break;
-            case 2:
-                Clear();
-                FilmMenu();
-                break;
-            default:
-                break;
         }
     }
+
+    public void LogOut()
+    {
+        Clear();
+        MainMenu();
+    }
+
+    
+
+    private void Reservations()
+    {
+        Clear();
+        WriteLine("Geen reserveringen");
+    }
+
 
     public void Snacks()
     {
@@ -207,8 +160,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
             case 2:
                 Snacks();
                 break;
-            case 3:
-                Film1();        
+            case 3:        
                 break;
             default:
                 break;
@@ -220,155 +172,5 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         WriteLine("\nPress any key to exit...");
         ReadKey(true);
         Environment.Exit(0);
-    }
-
-    public void AdminMenu()
-    {
-        string prompt = "Selecteer een optie en klik op ENTER om te bevestigen";
-
-        string[] options = {"Films beheren", "Stoelen beheren", "Snacks beheren", "Beheer klantgegevens", "Rapport printen", "Uitloggen"};
-        Menu Admin = new Menu(prompt, options);
-        int SelectedIndex = Admin.Run();
-
-        switch (SelectedIndex)
-        {
-            case 0:
-                FilmsAdmin();
-                break;
-            case 1:
-                SeatsAdmin();
-                break;
-            case 2:
-                SnacksAdmin();
-                break;
-            case 3:
-                UserDetails();
-                break;
-            case 4:
-                Rapport();
-                break;
-            case 5:
-                LogOut();
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void FilmsAdmin()
-    {
-        string prompt = "Selecteer een optie en klik op ENTER om te bevestigen";
-
-        string[] options = {"Films toevoegen", "Films verwijderen", "Film informatie aanpassen", "Terug"};
-        Menu Admin = new Menu(prompt, options);
-        int SelectedIndex = Admin.Run();
-
-        switch (SelectedIndex)
-        {
-            case 0:
-                //AdminAddFilm();
-                break;
-            case 1:
-                AdminRemoveFilm();
-                break;
-            case 2:
-                //AdminInfoFilm();
-                break;
-            case 3:
-                AdminMenu();
-                break;
-            default:
-                break;
-        }
-    }
-    public void AdminRemoveFilm()
-    {
-        Clear();
-        string prompt = "Selecter een film en klik op ENTER om te verwerken";
-        FilmsLogic filmsLogic = new FilmsLogic();
-
-        string[] options = new string[0];
-
-        foreach (FilmModel allFilms in filmsLogic.GetAllFilms())
-        {
-            Array.Resize(ref options, options.Length + 1);
-            options[options.Length - 1] = allFilms.filmName;
-        }
-
-        // Shift all elements one place to the right
-        Array.Resize(ref options, options.Length + 1);
-        for (int i = options.Length - 2; i >= 0; i--)
-        {
-            options[i + 1] = options[i];
-        }
-
-        // Add "Terug" at the end
-        options[options.Length - 1] = "Terug";
-
-        HashSet<string> hashSet = new HashSet<string>(options);
-        options = hashSet.ToArray();
-
-        Menu Films = new Menu(prompt, options);
-        int SelectedIndex = Films.Run();
-
-        if (SelectedIndex < options.Length - 1)
-        {
-            Clear();
-            prompt = @"Weet je zeker dat je wilt verwijderen?";
-
-            string[] options2 = {"Ja", "Nee, ga terug"};
-            Menu menu = new Menu(prompt, options2);
-            int SelectedIndex2 = menu.Run();
-
-            switch (SelectedIndex2)
-            {
-                case 0:
-                        while (filmsLogic.GetByName(options[SelectedIndex]) != null)
-                        {
-                            filmsLogic.DeleteFilm(filmsLogic.GetByName(options[SelectedIndex]));
-                        }
-                        AdminRemoveFilm();
-                        break;
-                case 1:
-                        AdminRemoveFilm();
-                        break;
-                default:
-                        break;
-            }
-        }
-        else
-        {
-            FilmsAdmin();
-        }
-    }
-
-    private void AddFilm()
-    {
-
-    }
-
-    private void ChangeFilm()
-    {
-        
-    }
-
-     private void SeatsAdmin()
-    {
-        
-    }
-
-     private void SnacksAdmin()
-    {
-        
-    }
-
-     private void UserDetails()
-    {
-        
-    }
-
-     private void Rapport()
-    {
-        
     }
 }

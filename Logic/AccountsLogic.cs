@@ -58,8 +58,11 @@ class AccountsLogic
         CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount;
     }
+
+    public void AddAccount(string emailAddress, string password, string fullName, bool isadmin)
+    {
+        AccountModel newAccount = new AccountModel(emailAddress, password, fullName, isadmin);
+        _accounts.Add(newAccount);
+        AccountsAccess.WriteAll(_accounts);
+    }
 }
-
-
-
-

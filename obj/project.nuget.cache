@@ -1,10 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "Ab7R2Uf+emTzkKwaJt7OUBpKxtfOrnP9Cc4D6RPW40SWwPD1AgJ+YO2Ycxkhtf15mqbigmInCgb4CDCLUITvDQ==",
+  "dgSpecHash": "zEIHkDROeNJ2w3lQ4nAkEW/ztRQg0KX+qBggGlwSpWVOGAvHGhjw4ivZUef2bjS8saKgUmFqo+lU0UEdX5VRiQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios-branch\\bioscoop\\bioscoop\\Project.csproj",
+  "projectFilePath": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\herot\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\nbjja\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
