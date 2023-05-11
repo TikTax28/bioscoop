@@ -79,7 +79,7 @@ class FilmsLogic
         // check filmname character length
         if (filmdescription.Length > 200)
         {
-            WriteLine("Film beschrijving mag niet te lang zijn!");
+            WriteLine("Film beschrijving mag niet langer dan 200 karakters zijn zijn!");
             return false;
         }
         return true;
@@ -93,7 +93,7 @@ class FilmsLogic
 
         if (!isValidDate)
         {
-            WriteLine("Foute format! Gebruik de format: DD-MM-YYYY");
+            WriteLine("Vul een geldige datum in. (DD-MM-YYYY)");
             return false;
         }
         return true;
@@ -107,7 +107,7 @@ class FilmsLogic
 
         if (!isValidTime)
         {
-            WriteLine("Foute format! Gebruik de format: HH:MM");
+            WriteLine("Vul een geldige tijd in. (HH:MM)");
             return false;
         }
         return true;

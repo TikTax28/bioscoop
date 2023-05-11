@@ -19,5 +19,12 @@
     "password": "jasper123",
     "fullName": "jasper",
     "isAdmin": false
+  },
+  {
+    "id": 5,
+    "emailAddress": "test@nl",
+    "password": "test",
+    "fullName": "kuku",
+    "isAdmin": false
   }
 ]
