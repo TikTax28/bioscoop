@@ -53,7 +53,7 @@ class AdminMenus
                 AdminRemoveFilm();
                 break;
             case 2:
-                //AdminInfoFilm();
+                AdminInfoFilm();
                 break;
             case 3:
                 AdminMenu();
@@ -202,6 +202,31 @@ class AdminMenus
         {
             FilmsAdmin();
         }
+    }
+
+    public void AdminInfoFilm()
+    {
+        Clear();
+        // Laad de gegevens uit JSON-bestand
+        var filmsLogic = new FilmsLogic();
+        var films = filmsLogic.GetAllFilms();
+
+        // Vraag om  ID van de film die moet worden bijgewerkt
+        Console.Write("Voer het ID in van de film die moet worden bijgewerkt: \n");
+        var id = int.Parse(Console.ReadLine());
+
+        foreach(FilmModel film in films)
+        {
+            if (film.Id == id)
+            {
+                Console.Write("Voer de nieuwe beschrijving in: ");
+                var newDescription = Console.ReadLine();
+                film.filmDescription = newDescription;
+                FilmsAccess.WriteAll(films);
+                AdminLogger.LogAdminChangeFilmDescription(film.filmName, newDescription);
+            }
+        }
+        FilmsAdmin();
     }
 
     private void ChangeFilm()
