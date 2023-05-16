@@ -26,11 +26,11 @@ static class AdminLogger
         }
     }
 
-    public static void LogAdminChangeFilmDescription(string filmname) //naam van functie aanpassen wanneer functie aangemaakt is.
+    public static void LogAdminChangeFilmDescription(string filmname, string filmDescription) //naam van functie aanpassen wanneer functie aangemaakt is.
     {
         // Neerzetten wat er precies gelogd moet worden.
         string Adminname = AccountsLogic.CurrentAccount.FullName;
-        string data = $"Admin {Adminname} heeft bij de film: {filmname} een aanpassing gedaan bij de beschrijving van de film.";
+        string data = $"Admin {Adminname} heeft bij de film: {filmname} de beschrijving veranderd naar: {filmDescription}.";
 
         using (StreamWriter writer = new StreamWriter(path, true))
         {
