@@ -6,8 +6,8 @@ class Program
     {
         CreateMenus newStart = new CreateMenus();
         AdminMenus admin = new AdminMenus();
-        admin.AdminMenu();
-        //newStart.Begin();
+        //admin.AdminMenu();
+        newStart.Begin();
         //newStart.FilmSeats();
     }
 }
