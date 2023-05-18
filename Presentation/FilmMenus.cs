@@ -69,13 +69,13 @@ class FilmMenus
                 // Toon het menu met tijdopties voor de geselecteerde datum
                 string selectedDate = dateOptions[selectedDateIndex];
                 List<string> timesForSelectedDate = dateToTimes[selectedDate];
-                int selectedTimeIndex = new Menu($"{selectedDate}\nKlik een tijd en klik op ENTER", timesForSelectedDate.ToArray()).Run() - 1; // subtract one to get index
+                int selectedTimeIndex = new Menu($"{selectedDate}\nKlik een tijd en klik op ENTER", timesForSelectedDate.ToArray()).Run();
                 
                 if (selectedTimeIndex >= 0 && selectedTimeIndex < timesForSelectedDate.Count)
                 {
                     // valid time selected, show seats..
                     string selectedTime = timesForSelectedDate[selectedTimeIndex];
-                    // ...
+                    FilmSeats(selectedFilm.filmName, selectedDate, selectedTime);
                 }
                 else
                 {
@@ -96,7 +96,7 @@ class FilmMenus
 
     }
 
-    public void FilmSeats()
+    public void FilmSeats(string selectedFilmName, string selectedDate, string selectedTime)
     {
         Clear();
         bool running = true;
@@ -221,8 +221,32 @@ class FilmMenus
                     WriteLine("Verlaten...");
                     running = false;
                     break;
+                case ConsoleKey.Enter:
+                    InfoFilmReservation(reservedSeats, selectedFilmName, selectedDate, selectedTime);
+                    break;
             }
             WriteLine();
+        }
+    }
+
+    private void InfoFilmReservation(List<string> reservedSeats, string selectedFilmName, string selectedDate, string selectedTime)
+    {
+        Clear();
+        string prompt = $"Info film:\nFilmnaam: {selectedFilmName}\nFilmdatum {selectedDate}\nFilmtijd: {selectedTime}";
+        string[] options = {"Reserveren", "Ga terug naar stoelen kiezen"};
+        Menu menu = new Menu(prompt, options);
+        int SelectedIndex = menu.Run();
+
+        switch (SelectedIndex)
+        {
+            case 0:
+                BookingLogic bookinglogic = new BookingLogic();
+                bookinglogic.AddReservation(reservedSeats, selectedDate, selectedTime);
+                FilmMenu();
+                break;
+            case 1:
+                break;
+
         }
     }
 }
