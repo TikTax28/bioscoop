@@ -1,0 +1,54 @@
+[
+  {
+    "account_id": 5,
+    "film_id": 3,
+    "seats": [
+      {
+        "row": "A",
+        "seat": 3
+      },
+      {
+        "row": "B",
+        "seat": 4
+      },
+      {
+        "row": "D",
+        "seat": 5
+      },
+      {
+        "row": "E",
+        "seat": 5
+      }
+    ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 4,
+    "seats": [
+      {
+        "row": "A",
+        "seat": 4
+      }
+    ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "E",
+        "seat": 4
+      }
+    ]
+  },
+  {
+    "account_id": 0,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "C",
+        "seat": 1
+      }
+    ]
+  }
+]

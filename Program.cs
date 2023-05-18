@@ -4,10 +4,11 @@ class Program
 {
     public static void Main()
     {
-        CreateMenus newStart = new CreateMenus();
         AdminMenus admin = new AdminMenus();
+        CreateMenus newStart = new CreateMenus();
+        FilmMenus filmmenu = new FilmMenus();
         //admin.AdminMenu();
         newStart.Begin();
-        //newStart.FilmSeats();
+        //filmmenu.FilmMenu();
     }
 }

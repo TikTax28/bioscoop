@@ -43,6 +43,10 @@ class FilmsLogic
     {
         return _films.Find(i => i.filmName == name);
     }
+    public FilmModel GetByDateAndTime(string date, string time)
+    {
+        return _films.Find(i => i.filmDate == date && i.filmTime == time);
+    }
     public List<FilmModel> GetAllFilms()
     {
         return _films;
