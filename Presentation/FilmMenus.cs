@@ -100,11 +100,43 @@ class FilmMenus
     public void FilmSeats(string selectedFilmName, string selectedDate, string selectedTime)
     {
         Clear();
+        FilmsLogic filmslogic = new FilmsLogic();
+        FilmModel film = filmslogic.GetByDateAndTime(selectedDate, selectedTime);
+
         bool running = true;
         int currentRow = 0;
         int currentColumn = 0;
-        int numRows = 10;
-        int numColumns = 10;
+        int numRows;
+        int numColumns;
+        string screen;
+
+        // film room 1 with 150 seats
+        if (film.filmRoom == "1")
+        {
+            screen = "\n -------------------- Screen --------------------\n";
+            numRows = 10;
+            numColumns = 15;
+        }
+        // film room 2 with 300 seats
+        else if (film.filmRoom == "2")
+        {
+            screen = "\n ------------------------------ Screen ------------------------------\n";
+            numRows = 15;
+            numColumns = 20;
+        }
+        // film room 3 with 500 seats
+        else if (film.filmRoom == "3")
+        {
+            screen = "\n ---------------------------------------- Screen ----------------------------------------\n";
+            numRows = 20;
+            numColumns = 25;
+        }
+        else
+        {
+            screen = "\n -------------------- Screen --------------------\n";
+            numRows = 10;
+            numColumns = 15;
+        }
 
         // Initialize unreserved seats
         bool[,] seats = new bool[numRows, numColumns];
@@ -116,6 +148,7 @@ class FilmMenus
             Clear();
             WriteLine("Selecteer een stoel (gebruik de pijltjestoetsen om te bewegen, spatiebalk om te reserveren of Esc om te verlaten):");
             WriteLine();
+            WriteLine(screen);
 
             for (int row = 0; row < numRows; row++)
             {
@@ -137,7 +170,7 @@ class FilmMenus
                     string seatNumber = "";
 
                     // Calculate seat number based on row and column
-                    if (col < 9)
+                    if (col < numColumns)
                     {
                         seatNumber += (char)('A' + row);
                         seatNumber += (col + 1).ToString();
@@ -188,7 +221,7 @@ class FilmMenus
                         string reservedSeat = "";
 
                         // Calculate reserved seat number based on row and column
-                        if (currentColumn < 9)
+                        if (currentColumn < numColumns)
                         {
                             reservedSeat += (char)('A' + currentRow);
                             reservedSeat += (currentColumn + 1).ToString();
@@ -211,7 +244,7 @@ class FilmMenus
                         string reservedSeat = "";
 
                         // Calculate reserved seat number based on row and column
-                        if (currentColumn < 9)
+                        if (currentColumn < numColumns)
                         {
                             reservedSeat += (char)('A' + currentRow);
                             reservedSeat += (currentColumn + 1).ToString();

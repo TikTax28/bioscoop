@@ -15,7 +15,7 @@ class BookingLogic
     {
         _bookings = BookingsAccess.LoadAll();
     }
-    public void AddReservation(List<string> reserverd_seats, string filmdate, string filmtime)
+    public void AddReservation(List<string> reserved_seats, string filmdate, string filmtime)
     {
         // Make an instance of FilmsLogic
         FilmsLogic filmslogic = new FilmsLogic();
@@ -32,10 +32,28 @@ class BookingLogic
         List<SeatModel> seats = new();
 
         // Loop through the list of reserved seats
-        foreach(string seat in reserverd_seats)
+        foreach (string seat in reserved_seats)
         {
+            // Substring takes the the index 0 with the length of 1
+            string row = seat.Substring(0, 1);
+            // Substring here starts at index 1
+            string columnString = seat.Substring(1);
+            int column;
+
+            // check if the column can be changed to an int
+            if (int.TryParse(columnString, out int columnInt))
+            {
+                column = columnInt;
+            }
+            else
+            {
+                // else give an error message
+                Console.WriteLine($"Invalid column number");
+                continue;
+            }
+
             // Create a SeatModel based on the reserved seat
-            SeatModel new_seat = new SeatModel(seat[0].ToString(), int.Parse(seat[1].ToString()));
+            SeatModel new_seat = new SeatModel(row, column);
             // Add it to the SeatModel list
             seats.Add(new_seat);
         }
