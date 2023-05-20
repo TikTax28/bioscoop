@@ -28,12 +28,130 @@
         "seat": 24
       },
       {
-        "row": "T",
-        "seat": 25
-      },
-      {
         "row": "L",
         "seat": 25
+      }
+    ]
+  },
+  {
+    "account_id": 0,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "A",
+        "seat": 3
+      },
+      {
+        "row": "A",
+        "seat": 4
+      },
+      {
+        "row": "A",
+        "seat": 5
+      },
+      {
+        "row": "E",
+        "seat": 5
+      },
+      {
+        "row": "F",
+        "seat": 7
+      },
+      {
+        "row": "I",
+        "seat": 7
+      },
+      {
+        "row": "I",
+        "seat": 8
+      },
+      {
+        "row": "J",
+        "seat": 8
+      },
+      {
+        "row": "J",
+        "seat": 9
+      }
+    ]
+  },
+  {
+    "account_id": 0,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "C",
+        "seat": 11
+      },
+      {
+        "row": "C",
+        "seat": 12
+      },
+      {
+        "row": "C",
+        "seat": 13
+      },
+      {
+        "row": "C",
+        "seat": 14
+      },
+      {
+        "row": "C",
+        "seat": 15
+      },
+      {
+        "row": "C",
+        "seat": 16
+      },
+      {
+        "row": "E",
+        "seat": 15
+      },
+      {
+        "row": "F",
+        "seat": 15
+      },
+      {
+        "row": "G",
+        "seat": 16
+      }
+    ]
+  },
+  {
+    "account_id": 0,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "M",
+        "seat": 13
+      },
+      {
+        "row": "N",
+        "seat": 13
+      },
+      {
+        "row": "O",
+        "seat": 14
+      },
+      {
+        "row": "O",
+        "seat": 15
+      },
+      {
+        "row": "O",
+        "seat": 16
+      },
+      {
+        "row": "P",
+        "seat": 16
+      },
+      {
+        "row": "P",
+        "seat": 17
+      },
+      {
+        "row": "P",
+        "seat": 18
       }
     ]
   }

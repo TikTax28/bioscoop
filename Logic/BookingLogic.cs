@@ -15,6 +15,16 @@ class BookingLogic
     {
         _bookings = BookingsAccess.LoadAll();
     }
+
+    public BookingModel GetById(int id)
+    {
+        return _bookings.Find(i => i.FilmId == id);
+    }
+    public List<BookingModel> GetListById(int id)
+    {
+        return _bookings.FindAll(i => i.FilmId == id);
+    }
+
     public void AddReservation(List<string> reserved_seats, string filmdate, string filmtime)
     {
         // Make an instance of FilmsLogic

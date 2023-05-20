@@ -140,6 +140,27 @@ class FilmMenus
 
         // Initialize unreserved seats
         bool[,] seats = new bool[numRows, numColumns];
+        // this array is for the seats reserved by OTHER PEOPLE
+        bool[,] seatsAlreadyReserved = new bool[numRows, numColumns];
+
+        BookingLogic bookinglogic = new BookingLogic();
+        List<BookingModel> reservations = bookinglogic.GetListById(film.Id);
+        foreach (BookingModel reservation in reservations)
+        {
+            foreach (SeatModel seat in reservation.Seats)
+            {
+                // gets the right letter based on index
+                int row = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".IndexOf(seat.Row);
+                // -1 so it changes to zero based index
+                int column = seat.Seat - 1;
+
+                if (row >= 0 && row < numRows && column >= 0 && column < numColumns)
+                {
+                    // Mark the seat as reserved
+                    seatsAlreadyReserved[row, column] = true;
+                }
+            }
+        }
 
         // Use list to keep track of the seats reserved
         List<string> reservedSeats = new List<string>();
@@ -161,6 +182,10 @@ class FilmMenus
                     else if (seats[row, col])
                     {
                         ForegroundColor = ConsoleColor.Red;
+                    }
+                    else if (seatsAlreadyReserved[row, col])
+                    {
+                        ForegroundColor = ConsoleColor.DarkYellow;
                     }
                     else
                     {
@@ -213,7 +238,7 @@ class FilmMenus
                     currentColumn = Math.Min(numColumns - 1, currentColumn + 1);
                     break;
                 case ConsoleKey.Spacebar:
-                    if (!seats[currentRow, currentColumn] && reservedSeats.Count < 9)
+                    if (!seats[currentRow, currentColumn] && !seatsAlreadyReserved[currentRow, currentColumn] && reservedSeats.Count < 9)
                     {
                         seats[currentRow, currentColumn] = true;
                         ForegroundColor = ConsoleColor.White;
