@@ -73,8 +73,9 @@ class FilmMenus
                 
                 if (selectedTimeIndex >= 0 && selectedTimeIndex < timesForSelectedDate.Count)
                 {
-                    // valid time selected, show seats..
+                    // Store the time selected into a string
                     string selectedTime = timesForSelectedDate[selectedTimeIndex];
+                    // Pass the film name, film date and filmtime to FilmSeats
                     FilmSeats(selectedFilm.filmName, selectedDate, selectedTime);
                 }
                 else
@@ -232,7 +233,9 @@ class FilmMenus
     private void InfoFilmReservation(List<string> reservedSeats, string selectedFilmName, string selectedDate, string selectedTime)
     {
         Clear();
+        // The film info
         string prompt = $"Info film:\nFilmnaam: {selectedFilmName}\nFilmdatum {selectedDate}\nFilmtijd: {selectedTime}";
+        // The options you can choose
         string[] options = {"Reserveren", "Ga terug naar stoelen kiezen"};
         Menu menu = new Menu(prompt, options);
         int SelectedIndex = menu.Run();
@@ -241,7 +244,9 @@ class FilmMenus
         {
             case 0:
                 BookingLogic bookinglogic = new BookingLogic();
+                // Call the method AddReservation to do the logic
                 bookinglogic.AddReservation(reservedSeats, selectedDate, selectedTime);
+                // Once reservation is added, go back to the film menu
                 FilmMenu();
                 break;
             case 1:
