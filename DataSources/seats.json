@@ -50,5 +50,47 @@
         "seat": 1
       }
     ]
+  },
+  {
+    "account_id": 0,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "A",
+        "seat": 1
+      },
+      {
+        "row": "A",
+        "seat": 2
+      },
+      {
+        "row": "A",
+        "seat": 3
+      },
+      {
+        "row": "B",
+        "seat": 4
+      },
+      {
+        "row": "B",
+        "seat": 5
+      },
+      {
+        "row": "B",
+        "seat": 6
+      },
+      {
+        "row": "C",
+        "seat": 7
+      },
+      {
+        "row": "C",
+        "seat": 8
+      },
+      {
+        "row": "C",
+        "seat": 9
+      }
+    ]
   }
 ]

@@ -156,6 +156,13 @@ class FilmMenus
             // Print out reserved seats
             WriteLine($"Gereserveerde stoelen: {string.Join(", ", reservedSeats)}");
 
+            if (reservedSeats.Count == 9)
+            {
+                ForegroundColor = ConsoleColor.Red;
+                WriteLine("\nJe kan niet meer dan 9 stoelen reserveren!");
+                ResetColor();
+            }
+
             ConsoleKeyInfo keyInfo = ReadKey(true);
 
             switch (keyInfo.Key)
@@ -173,7 +180,7 @@ class FilmMenus
                     currentColumn = Math.Min(numColumns - 1, currentColumn + 1);
                     break;
                 case ConsoleKey.Spacebar:
-                    if (!seats[currentRow, currentColumn])
+                    if (!seats[currentRow, currentColumn] && reservedSeats.Count < 9)
                     {
                         seats[currentRow, currentColumn] = true;
                         ForegroundColor = ConsoleColor.White;
@@ -219,8 +226,7 @@ class FilmMenus
                     }
                     break;
                 case ConsoleKey.Escape:
-                    WriteLine("Verlaten...");
-                    running = false;
+                    FilmMenu();
                     break;
                 case ConsoleKey.Enter:
                     InfoFilmReservation(reservedSeats, selectedFilmName, selectedDate, selectedTime);
