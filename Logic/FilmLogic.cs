@@ -141,4 +141,22 @@ class FilmsLogic
         _films.Add(newFilm);
         FilmsAccess.WriteAll(_films);
     }
+
+    public void UpdateFilm(FilmModel updatedFilm)
+{
+    // Find the index of the film to be updated
+    int index = _films.FindIndex(f => f.Id == updatedFilm.Id);
+
+    if (index != -1)
+    {
+        // Update the film in the list
+        _films[index] = updatedFilm;
+        FilmsAccess.WriteAll(_films);
+        WriteLine("Filmgegevens zijn succesvol bijgewerkt.");
+    }
+    else
+    {
+        WriteLine("Film niet gevonden. Kan filmgegevens niet bijwerken.");
+    }
+}
 }
