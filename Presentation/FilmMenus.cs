@@ -73,8 +73,9 @@ class FilmMenus
                 
                 if (selectedTimeIndex >= 0 && selectedTimeIndex < timesForSelectedDate.Count)
                 {
-                    // valid time selected, show seats..
+                    // Store the time selected into a string
                     string selectedTime = timesForSelectedDate[selectedTimeIndex];
+                    // Pass the film name, film date and filmtime to FilmSeats
                     FilmSeats(selectedFilm.filmName, selectedDate, selectedTime);
                 }
                 else
@@ -99,14 +100,67 @@ class FilmMenus
     public void FilmSeats(string selectedFilmName, string selectedDate, string selectedTime)
     {
         Clear();
+        FilmsLogic filmslogic = new FilmsLogic();
+        FilmModel film = filmslogic.GetByDateAndTime(selectedDate, selectedTime);
+
         bool running = true;
         int currentRow = 0;
         int currentColumn = 0;
-        int numRows = 10;
-        int numColumns = 10;
+        int numRows;
+        int numColumns;
+        string screen;
+
+        // film room 1 with 150 seats
+        if (film.filmRoom == "1")
+        {
+            screen = "\n -------------------- Screen --------------------\n";
+            numRows = 10;
+            numColumns = 15;
+        }
+        // film room 2 with 300 seats
+        else if (film.filmRoom == "2")
+        {
+            screen = "\n ------------------------------ Screen ------------------------------\n";
+            numRows = 15;
+            numColumns = 20;
+        }
+        // film room 3 with 500 seats
+        else if (film.filmRoom == "3")
+        {
+            screen = "\n ---------------------------------------- Screen ----------------------------------------\n";
+            numRows = 20;
+            numColumns = 25;
+        }
+        else
+        {
+            screen = "\n -------------------- Screen --------------------\n";
+            numRows = 10;
+            numColumns = 15;
+        }
 
         // Initialize unreserved seats
         bool[,] seats = new bool[numRows, numColumns];
+        // this array is for the seats reserved by OTHER PEOPLE
+        bool[,] seatsAlreadyReserved = new bool[numRows, numColumns];
+
+        BookingLogic bookinglogic = new BookingLogic();
+        List<BookingModel> reservations = bookinglogic.GetListById(film.Id);
+        foreach (BookingModel reservation in reservations)
+        {
+            foreach (SeatModel seat in reservation.Seats)
+            {
+                // gets the right letter based on index
+                int row = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".IndexOf(seat.Row);
+                // -1 so it changes to zero based index
+                int column = seat.Seat - 1;
+
+                if (row >= 0 && row < numRows && column >= 0 && column < numColumns)
+                {
+                    // Mark the seat as reserved
+                    seatsAlreadyReserved[row, column] = true;
+                }
+            }
+        }
 
         // Use list to keep track of the seats reserved
         List<string> reservedSeats = new List<string>();
@@ -115,6 +169,7 @@ class FilmMenus
             Clear();
             WriteLine("Selecteer een stoel (gebruik de pijltjestoetsen om te bewegen, spatiebalk om te reserveren of Esc om te verlaten):");
             WriteLine();
+            WriteLine(screen);
 
             for (int row = 0; row < numRows; row++)
             {
@@ -128,6 +183,10 @@ class FilmMenus
                     {
                         ForegroundColor = ConsoleColor.Red;
                     }
+                    else if (seatsAlreadyReserved[row, col])
+                    {
+                        ForegroundColor = ConsoleColor.DarkYellow;
+                    }
                     else
                     {
                         ForegroundColor = ConsoleColor.White;
@@ -136,7 +195,7 @@ class FilmMenus
                     string seatNumber = "";
 
                     // Calculate seat number based on row and column
-                    if (col < 9)
+                    if (col < numColumns)
                     {
                         seatNumber += (char)('A' + row);
                         seatNumber += (col + 1).ToString();
@@ -155,6 +214,13 @@ class FilmMenus
             // Print out reserved seats
             WriteLine($"Gereserveerde stoelen: {string.Join(", ", reservedSeats)}");
 
+            if (reservedSeats.Count == 9)
+            {
+                ForegroundColor = ConsoleColor.Red;
+                WriteLine("\nJe kan niet meer dan 9 stoelen reserveren!");
+                ResetColor();
+            }
+
             ConsoleKeyInfo keyInfo = ReadKey(true);
 
             switch (keyInfo.Key)
@@ -172,7 +238,7 @@ class FilmMenus
                     currentColumn = Math.Min(numColumns - 1, currentColumn + 1);
                     break;
                 case ConsoleKey.Spacebar:
-                    if (!seats[currentRow, currentColumn])
+                    if (!seats[currentRow, currentColumn] && !seatsAlreadyReserved[currentRow, currentColumn] && reservedSeats.Count < 9)
                     {
                         seats[currentRow, currentColumn] = true;
                         ForegroundColor = ConsoleColor.White;
@@ -180,7 +246,7 @@ class FilmMenus
                         string reservedSeat = "";
 
                         // Calculate reserved seat number based on row and column
-                        if (currentColumn < 9)
+                        if (currentColumn < numColumns)
                         {
                             reservedSeat += (char)('A' + currentRow);
                             reservedSeat += (currentColumn + 1).ToString();
@@ -203,7 +269,7 @@ class FilmMenus
                         string reservedSeat = "";
 
                         // Calculate reserved seat number based on row and column
-                        if (currentColumn < 9)
+                        if (currentColumn < numColumns)
                         {
                             reservedSeat += (char)('A' + currentRow);
                             reservedSeat += (currentColumn + 1).ToString();
@@ -218,8 +284,7 @@ class FilmMenus
                     }
                     break;
                 case ConsoleKey.Escape:
-                    WriteLine("Verlaten...");
-                    running = false;
+                    FilmMenu();
                     break;
                 case ConsoleKey.Enter:
                     InfoFilmReservation(reservedSeats, selectedFilmName, selectedDate, selectedTime);
@@ -232,7 +297,9 @@ class FilmMenus
     private void InfoFilmReservation(List<string> reservedSeats, string selectedFilmName, string selectedDate, string selectedTime)
     {
         Clear();
+        // The film info
         string prompt = $"Info film:\nFilmnaam: {selectedFilmName}\nFilmdatum {selectedDate}\nFilmtijd: {selectedTime}";
+        // The options you can choose
         string[] options = {"Reserveren", "Ga terug naar stoelen kiezen"};
         Menu menu = new Menu(prompt, options);
         int SelectedIndex = menu.Run();
@@ -241,7 +308,9 @@ class FilmMenus
         {
             case 0:
                 BookingLogic bookinglogic = new BookingLogic();
+                // Call the method AddReservation to do the logic
                 bookinglogic.AddReservation(reservedSeats, selectedDate, selectedTime);
+                // Once reservation is added, go back to the film menu
                 FilmMenu();
                 break;
             case 1:
