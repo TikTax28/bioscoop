@@ -53,7 +53,7 @@ class FilmsLogic
     }
     public void DeleteFilm(FilmModel film)
     {
-        _films.Remove(film);
+        film.Active = false;
         FilmsAccess.WriteAll(_films);
     }
     public bool CheckFilmName(string filmname)
@@ -159,4 +159,14 @@ class FilmsLogic
         WriteLine("Film niet gevonden. Kan filmgegevens niet bijwerken.");
     }
 }
+    public List<FilmModel> filmsOnlyActive()
+    {
+        List<FilmModel> allFilmsActive = GetAllFilms();
+        List<FilmModel> allFilms = GetAllFilms().ToList();;
+        foreach (FilmModel film in allFilms)
+        {
+            if (film.Active == false) allFilmsActive.Remove(film);
+        }
+        return allFilmsActive;
+    }
 }

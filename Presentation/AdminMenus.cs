@@ -142,12 +142,13 @@ class AdminMenus
         FilmsLogic filmsLogic = new FilmsLogic();
 
         string[] options = new string[0];
+        var allActiveFilms = filmsLogic.filmsOnlyActive();
 
         // Get all the films
-        foreach (FilmModel allFilms in filmsLogic.GetAllFilms())
+        foreach (FilmModel film in allActiveFilms)
         {
             Array.Resize(ref options, options.Length + 1);
-            options[options.Length - 1] = allFilms.filmName;
+            options[options.Length - 1] = film.filmName;
         }
 
         // increse the array size
@@ -181,14 +182,14 @@ class AdminMenus
             {
                 case 0:
                         // Use the name of the selected option to get the film info
-                        while (filmsLogic.GetByName(options[SelectedIndex]) != null)
-                        {
+                        // while (filmsLogic.GetByName(options[SelectedIndex]) != null)
+                        // {
                             FilmModel filmToDelete = filmsLogic.GetByName(options[SelectedIndex]);
                             string filmToDeleteForLog = filmToDelete.filmName;
                             filmsLogic.DeleteFilm(filmToDelete);
                             //Functie aanroepen die alles logged wat er gebeurd.
                             AdminLogger.LogAdminRemoveFilm(filmToDeleteForLog);
-                        }
+                        // }
                         AdminRemoveFilm();
                         break;
                 case 1:

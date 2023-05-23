@@ -154,5 +154,47 @@
         "seat": 18
       }
     ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 2,
+    "seats": [
+      {
+        "row": "F",
+        "seat": 8
+      },
+      {
+        "row": "F",
+        "seat": 9
+      },
+      {
+        "row": "F",
+        "seat": 10
+      },
+      {
+        "row": "F",
+        "seat": 11
+      },
+      {
+        "row": "F",
+        "seat": 12
+      },
+      {
+        "row": "F",
+        "seat": 13
+      },
+      {
+        "row": "F",
+        "seat": 14
+      },
+      {
+        "row": "F",
+        "seat": 15
+      },
+      {
+        "row": "F",
+        "seat": 16
+      }
+    ]
   }
 ]
