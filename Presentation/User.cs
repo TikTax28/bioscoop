@@ -8,14 +8,25 @@ static class User
 
     public static void LogIn()
     {
-        WriteLine("Login");
+        string ?email;
+        string ?password;
         WriteLine("Vul uw emailadres in: ");
-        string ?email = ReadLine();
-        WriteLine("Vul uw wachtwoord in: ");
-        string ?password = ReadLine();
+        while (true)
+        {
+            email = ReadLine();
+            if (email != "") break;
+            WriteLine("U moet iets invullen");
+        }
+        while (true)
+        {
+            WriteLine("Vul uw wachtwoord in: ");
+            password = ReadLine();
+            if (password != "") break;
+            WriteLine("U moet iets invullen");
+        }
         AccountModel acc = accountsLogic.CheckLogin(email, password);
         if (acc != null && acc.isAdmin == false)
-        {            
+        {
             var temp = new CreateMenus();
             temp.LoggedInMenu();
         }
@@ -26,10 +37,9 @@ static class User
         }
         else
         {
-            WriteLine("Geen account gevonden met die email en wachtwoord.");
             Clear();
-            var temp = new CreateMenus();
-            temp.LogIn();
+            WriteLine("Geen account gevonden met die email en wachtwoord.");
+            LogIn();
         }
     }
     public static void CreateAcc()
