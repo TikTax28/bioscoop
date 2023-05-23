@@ -1,25 +1,25 @@
 [
   {
     "id": 1,
-    "filmName": "Shrek Forever",
-    "filmDescription": "shrek alweer op pad.",
+    "filmName": "abc",
+    "filmDescription": "Shrek krijgt een aneurysme",
     "filmDate": "28-05-2024",
-    "filmTime": "12:00",
-    "filmRoom": "2",
-    "active": true
-  },
-  {
-    "id": 2,
-    "filmName": "test2",
-    "filmDescription": "Dit is test2",
-    "filmDate": "17-12-2025",
     "filmTime": "21:12",
     "filmRoom": "2",
     "active": true
   },
   {
+    "id": 2,
+    "filmName": "abc",
+    "filmDescription": "Dit is test2",
+    "filmDate": "17-12-2025",
+    "filmTime": "21:12",
+    "filmRoom": "3",
+    "active": true
+  },
+  {
     "id": 3,
-    "filmName": "test3",
+    "filmName": "abc",
     "filmDescription": "Dit is test3",
     "filmDate": "12-12-2023",
     "filmTime": "12:30",
