@@ -18,19 +18,7 @@ static class AdminLogger
     {
         // Neerzetten wat er precies gelogd moet worden.
         string Adminname = AccountsLogic.CurrentAccount.FullName;
-        string data = $"Admin {Adminname} heeft de film: {filmname} verwijderd.";
-
-        using (StreamWriter writer = new StreamWriter(path, true))
-        {
-            writer.WriteLine(string.Join(",", data));
-        }
-    }
-
-    public static void LogAdminChangeFilmDescription(string filmname, string filmDescription) //naam van functie aanpassen wanneer functie aangemaakt is.
-    {
-        // Neerzetten wat er precies gelogd moet worden.
-        string Adminname = AccountsLogic.CurrentAccount.FullName;
-        string data = $"Admin {Adminname} heeft bij de film: {filmname} de beschrijving veranderd naar: {filmDescription}.";
+        string data = $"Admin {Adminname} heeft de film: {filmname} op non-actief gezet.";
 
         using (StreamWriter writer = new StreamWriter(path, true))
         {
@@ -50,4 +38,63 @@ static class AdminLogger
         }
     }
     */
+    public static void LogAdminChangeFilmname(string filmname, string newFilmname)
+    {
+        // Neerzetten wat er precies gelogd moet worden.
+        string Adminname = AccountsLogic.CurrentAccount.FullName;
+        string data = $"Admin {Adminname} heeft de filmnaam van: {filmname} veranderd naar: {newFilmname}.";
+
+        using (StreamWriter writer = new StreamWriter(path, true))
+        {
+            writer.WriteLine(string.Join(",", data));
+        }
+    }
+
+    public static void LogAdminChangeFilmDescription(string filmname, string filmDescription, string newFilmDescription) //naam van functie aanpassen wanneer functie aangemaakt is.
+    {
+        // Neerzetten wat er precies gelogd moet worden.
+        string Adminname = AccountsLogic.CurrentAccount.FullName;
+        string data = $"Admin {Adminname} heeft bij de film: {filmname} de beschrijving veranderd van: {filmDescription} naar: {newFilmDescription}";
+
+        using (StreamWriter writer = new StreamWriter(path, true))
+        {
+            writer.WriteLine(string.Join(",", data));
+        }
+    }
+
+    public static void LogAdminChangeFilmDate(string filmname, string filmDate, string newFilmDate) //naam van functie aanpassen wanneer functie aangemaakt is.
+    {
+        // Neerzetten wat er precies gelogd moet worden.
+        string Adminname = AccountsLogic.CurrentAccount.FullName;
+        string data = $"Admin {Adminname} heeft bij de film: {filmname} de datum aangepast van: {filmDate} naar: {newFilmDate}.";
+
+        using (StreamWriter writer = new StreamWriter(path, true))
+        {
+            writer.WriteLine(string.Join(",", data));
+        }
+    }
+
+    public static void LogAdminChangeFilmTime(string filmname, string filmTime, string newFilmTime) //naam van functie aanpassen wanneer functie aangemaakt is.
+    {
+        // Neerzetten wat er precies gelogd moet worden.
+        string Adminname = AccountsLogic.CurrentAccount.FullName;
+        string data = $"Admin {Adminname} heeft bij de film: {filmname} de tijd aangepast van: {filmTime} naar: {newFilmTime}.";
+
+        using (StreamWriter writer = new StreamWriter(path, true))
+        {
+            writer.WriteLine(string.Join(",", data));
+        }
+    }
+
+    public static void LogAdminChangeFilmRoom(string filmname, string filmRoom, string newFilmRoom) //naam van functie aanpassen wanneer functie aangemaakt is.
+    {
+        // Neerzetten wat er precies gelogd moet worden.
+        string Adminname = AccountsLogic.CurrentAccount.FullName;
+        string data = $"Admin {Adminname} heeft bij de film: {filmname} de zaal aangepast van: {filmRoom} naar: {newFilmRoom}.";
+
+        using (StreamWriter writer = new StreamWriter(path, true))
+        {
+            writer.WriteLine(string.Join(",", data));
+        }
+    }
 }

@@ -8,10 +8,10 @@ class FilmMenus
         Clear();
         string prompt = "Selecter een film en klik op ENTER";
         FilmsLogic filmsLogic = new FilmsLogic();
-        var allFilms = filmsLogic.GetAllFilms();
+        var allFilms = filmsLogic.filmsOnlyActive();
         string[] options = new string[0];
 
-        foreach (FilmModel film in allFilms) // Loop door alle films in de database
+        foreach (var film in allFilms) // Loop door alle films in de database
         {
             Array.Resize(ref options, options.Length + 1); // Vergroot de grootte van de opties-array met 1
             options[options.Length - 1] = film.filmName; // Voeg de naam van de film toe aan de opties-array
@@ -287,6 +287,7 @@ class FilmMenus
                     FilmMenu();
                     break;
                 case ConsoleKey.Enter:
+                    if (reservedSeats.Count > 0)
                     InfoFilmReservation(reservedSeats, selectedFilmName, selectedDate, selectedTime);
                     break;
             }

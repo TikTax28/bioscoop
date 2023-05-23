@@ -1,34 +1,38 @@
 [
   {
     "id": 1,
-    "filmName": "test1",
-    "filmDescription": "12321312312",
-    "filmDate": "12-12-2003",
+    "filmName": "Shrek Forever",
+    "filmDescription": "shrek alweer op pad.",
+    "filmDate": "28-05-2024",
     "filmTime": "12:00",
-    "filmRoom": "3"
+    "filmRoom": "2",
+    "active": true
   },
   {
     "id": 2,
     "filmName": "test2",
     "filmDescription": "Dit is test2",
-    "filmDate": "17-12-2005",
+    "filmDate": "17-12-2025",
     "filmTime": "21:12",
-    "filmRoom": "2"
+    "filmRoom": "2",
+    "active": true
   },
   {
     "id": 3,
-    "filmName": "test1",
+    "filmName": "test3",
     "filmDescription": "Dit is test3",
-    "filmDate": "12-12-2003",
+    "filmDate": "12-12-2023",
     "filmTime": "12:30",
-    "filmRoom": "1"
+    "filmRoom": "1",
+    "active": true
   },
   {
     "id": 4,
     "filmName": "abcc",
     "filmDescription": "abcd",
-    "filmDate": "29-02-2024",
+    "filmDate": "29-02-2023",
     "filmTime": "13:13",
-    "filmRoom": "1"
+    "filmRoom": "3",
+    "active": false
   }
 ]

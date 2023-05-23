@@ -154,5 +154,100 @@
         "seat": 18
       }
     ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 2,
+    "seats": [
+      {
+        "row": "F",
+        "seat": 8
+      },
+      {
+        "row": "F",
+        "seat": 9
+      },
+      {
+        "row": "F",
+        "seat": 10
+      },
+      {
+        "row": "F",
+        "seat": 11
+      },
+      {
+        "row": "F",
+        "seat": 12
+      },
+      {
+        "row": "F",
+        "seat": 13
+      },
+      {
+        "row": "F",
+        "seat": 14
+      },
+      {
+        "row": "F",
+        "seat": 15
+      },
+      {
+        "row": "F",
+        "seat": 16
+      }
+    ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "L",
+        "seat": 10
+      },
+      {
+        "row": "L",
+        "seat": 11
+      },
+      {
+        "row": "L",
+        "seat": 12
+      }
+    ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": []
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": []
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": []
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "D",
+        "seat": 1
+      }
+    ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "A",
+        "seat": 1
+      }
+    ]
   }
 ]
