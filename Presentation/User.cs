@@ -135,6 +135,7 @@ static class User
             }
         }
         accountsLogic.AddAccount(EmailAddress, PassWord, FullName, false);
+        accountsLogic.CheckLogin(EmailAddress, PassWord);
         Clear();
         var temp = new CreateMenus();
         temp.LoggedInMenu();
