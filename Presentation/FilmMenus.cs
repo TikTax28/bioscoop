@@ -43,17 +43,18 @@ class FilmMenus
         Clear();
         FilmsLogic filmsLogic = new FilmsLogic();
         string prompt2 = selectedFilm.filmDescription;
-        
-        Dictionary<string, List<string>> dateToTimes = new Dictionary<string, List<string>>(); // Maak een dictionary om elke datum te koppelen aan een lijst met beschikbare tijden
-        foreach (FilmModel film in filmsLogic.GetAllFilms())
+
+        Dictionary<string, List<FilmModel>> dateToTimes = new Dictionary<string, List<FilmModel>>();
+        foreach (FilmModel film in filmsLogic.GetAllFilms())    
         {
             if (film.filmName == selectedFilm.filmName)
             {
-                if (!dateToTimes.ContainsKey(film.filmDate)) // Als de datum nog niet aan het woordenboek is toegevoegd, voeg dan een nieuwe lege lijst toe
+                string date = film.filmDate;
+                if (!dateToTimes.ContainsKey(date))
                 {
-                    dateToTimes.Add(film.filmDate, new List<string>());
+                    dateToTimes[date] = new List<FilmModel>();
                 }
-                dateToTimes[film.filmDate].Add(film.filmTime); // Voeg de tijd toe aan de lijst met tijden voor deze datum
+                dateToTimes[date].Add(film);
             }
         }
 
@@ -68,15 +69,34 @@ class FilmMenus
             {
                 // Toon het menu met tijdopties voor de geselecteerde datum
                 string selectedDate = dateOptions[selectedDateIndex];
-                List<string> timesForSelectedDate = dateToTimes[selectedDate];
-                int selectedTimeIndex = new Menu($"{selectedDate}\nKlik een tijd en klik op ENTER", timesForSelectedDate.ToArray()).Run();
+                List<FilmModel> filmsForSelectedDate = dateToTimes[selectedDate];
+
+                string[] timeOptions = filmsForSelectedDate.Select(f => f.filmTime).ToArray();
+                timeOptions = timeOptions.Append("Terug").ToArray();
+
+                int selectedTimeIndex = new Menu($"{selectedDate}\nKlik een tijd en klik op ENTER", timeOptions).Run();
                 
-                if (selectedTimeIndex >= 0 && selectedTimeIndex < timesForSelectedDate.Count)
+                if (selectedTimeIndex >= 0 && selectedTimeIndex < timeOptions.Length - 1)
                 {
-                    // Store the time selected into a string
-                    string selectedTime = timesForSelectedDate[selectedTimeIndex];
-                    // Pass the film name, film date and filmtime to FilmSeats
-                    FilmSeats(selectedFilm.filmName, selectedDate, selectedTime);
+                    string selectedTime = timeOptions[selectedTimeIndex];
+                    FilmModel selectedFilmModel = filmsForSelectedDate.FirstOrDefault(f => f.filmTime == selectedTime);
+
+                    if (selectedFilmModel != null)
+                    {
+                        selectedFilm.filmTime = selectedTime;
+                        FilmSeats(selectedFilmModel);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ongeldige keuze. Probeer opnieuw.");
+                    }
+                }
+                else if (selectedTimeIndex == timeOptions.Length - 1)
+                {
+                    // Go back to previous menu when 'Terug' is selected
+                    FilmMenu();
+                    break;
                 }
                 else
                 {
@@ -85,7 +105,6 @@ class FilmMenus
             }
             else if (selectedDateIndex == dateOptions.Length - 1)
             {
-                // Go back to previous menu when 'Terug' is selected
                 FilmMenu();
                 break;
             }
@@ -94,14 +113,13 @@ class FilmMenus
                 Console.WriteLine("Ongeldige keuze. Probeer opnieuw.");
             }
         }
-
     }
 
-    public void FilmSeats(string selectedFilmName, string selectedDate, string selectedTime)
+    public void FilmSeats(FilmModel selectedFilm)
     {
         Clear();
         FilmsLogic filmslogic = new FilmsLogic();
-        FilmModel film = filmslogic.GetByDateAndTime(selectedDate, selectedTime);
+        FilmModel film = filmslogic.GetByDateAndTime(selectedFilm.filmDate, selectedFilm.filmTime);
 
         bool running = true;
         int currentRow = 0;
@@ -285,21 +303,25 @@ class FilmMenus
                     break;
                 case ConsoleKey.Escape:
                     FilmMenu();
+                    running = false;
                     break;
                 case ConsoleKey.Enter:
                     if (reservedSeats.Count > 0)
-                    InfoFilmReservation(reservedSeats, selectedFilmName, selectedDate, selectedTime);
+                    InfoFilmReservation(reservedSeats, selectedFilm);
+                    running = false;
+                    break;
+                default:
                     break;
             }
             WriteLine();
         }
     }
 
-    private void InfoFilmReservation(List<string> reservedSeats, string selectedFilmName, string selectedDate, string selectedTime)
+    private void InfoFilmReservation(List<string> reservedSeats, FilmModel selectedFilm)
     {
         Clear();
         // The film info
-        string prompt = $"Info film:\nFilmnaam: {selectedFilmName}\nFilmdatum {selectedDate}\nFilmtijd: {selectedTime}";
+        string prompt = $"Info film:\nFilmnaam: {selectedFilm.filmName}\nFilmdatum {selectedFilm.filmDate}\nFilmtijd: {selectedFilm.filmTime}";
         // The options you can choose
         string[] options = {"Reserveren", "Ga terug naar stoelen kiezen"};
         Menu menu = new Menu(prompt, options);
@@ -308,13 +330,17 @@ class FilmMenus
         switch (SelectedIndex)
         {
             case 0:
-                BookingLogic bookinglogic = new BookingLogic();
+                BookingLogic bookinglogic = new BookingLogic(); 
                 // Call the method AddReservation to do the logic
-                bookinglogic.AddReservation(reservedSeats, selectedDate, selectedTime);
+                bookinglogic.AddReservation(reservedSeats, selectedFilm.filmDate, selectedFilm.filmTime);
                 // Once reservation is added, go back to the film menu
-                FilmMenu();
+                CreateMenus menus = new CreateMenus();
+                menus.LoggedInMenu(); // Ga terug naar het ingelogde menu
                 break;
             case 1:
+                FilmSeats(selectedFilm);
+                break;
+            default:
                 break;
 
         }

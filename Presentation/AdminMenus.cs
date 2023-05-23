@@ -238,17 +238,18 @@ class AdminMenus
         Clear();
         FilmsLogic filmsLogic = new FilmsLogic();
         string prompt2 = selectedFilm.filmDescription;
-        
-        Dictionary<string, List<string>> dateToTimes = new Dictionary<string, List<string>>(); // Maak een dictionary om elke datum te koppelen aan een lijst met beschikbare tijden
-        foreach (FilmModel film in filmsLogic.GetAllFilms())
+
+        Dictionary<string, List<FilmModel>> dateToTimes = new Dictionary<string, List<FilmModel>>();
+        foreach (FilmModel film in filmsLogic.GetAllFilms())    
         {
             if (film.filmName == selectedFilm.filmName)
             {
-                if (!dateToTimes.ContainsKey(film.filmDate)) // Als de datum nog niet aan het woordenboek is toegevoegd, voeg dan een nieuwe lege lijst toe
+                string date = film.filmDate;
+                if (!dateToTimes.ContainsKey(date))
                 {
-                    dateToTimes.Add(film.filmDate, new List<string>());
+                    dateToTimes[date] = new List<FilmModel>();
                 }
-                dateToTimes[film.filmDate].Add(film.filmTime); // Voeg de tijd toe aan de lijst met tijden voor deze datum
+                dateToTimes[date].Add(film);
             }
         }
 
@@ -262,9 +263,9 @@ class AdminMenus
             if (selectedDateIndex >= 0 && selectedDateIndex < dateOptions.Length - 1)
             {
                 string selectedDate = dateOptions[selectedDateIndex];
-                List<string> timesForSelectedDate = dateToTimes[selectedDate];
+                List<FilmModel> filmsForSelectedDate = dateToTimes[selectedDate];
 
-                string[] timeOptions = timesForSelectedDate.ToArray();
+                string[] timeOptions = filmsForSelectedDate.Select(f => f.filmTime).ToArray();
                 timeOptions = timeOptions.Append("Terug").ToArray();
 
                 int selectedTimeIndex = new Menu($"{selectedDate}\nKlik een tijd en klik op ENTER", timeOptions).Run();
@@ -272,8 +273,17 @@ class AdminMenus
                 if (selectedTimeIndex >= 0 && selectedTimeIndex < timeOptions.Length - 1)
                 {
                     string selectedTime = timeOptions[selectedTimeIndex];
-                    selectedFilm.filmTime = selectedTime; // Update the selected film's time
-                    ChangeFilmInfo(selectedFilm);
+                    FilmModel selectedFilmModel = filmsForSelectedDate.FirstOrDefault(f => f.filmTime == selectedTime);
+
+                    if (selectedFilmModel != null)
+                    {
+                        selectedFilm.filmTime = selectedTime;
+                        ChangeFilmInfo(selectedFilmModel);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ongeldige keuze. Probeer opnieuw.");
+                    }
                 }
                 else if (selectedTimeIndex == timeOptions.Length - 1)
                 {
@@ -307,9 +317,7 @@ class AdminMenus
         $"Filmnaam: {selectedFilm.filmName}",
         $"Beschrijving: {selectedFilm.filmDescription}",
         $"Datum: {selectedFilm.filmDate}",
-        $"Tijd: {selectedFilm.filmTime}",
-        $"Zaal: {selectedFilm.filmRoom}",
-        $"Actief: {selectedFilm.Active}"
+        $"Tijd: {selectedFilm.filmTime}"
         };
         Menu info = new Menu(prompt, options);
         int SelectedIndex = info.Run();
@@ -318,49 +326,69 @@ class AdminMenus
         {
         case 0:
             // Change film name
-            Clear();
-            WriteLine("Voer de nieuwe filmnaam in: ");
-            string newFilmName = ReadLine();
-            string oldFilmName = selectedFilm.filmName;
-            selectedFilm.filmName = newFilmName;
-            //Functie aanroepen die alles logged wat er gebeurd.
-            AdminLogger.LogAdminChangeFilmname(oldFilmName, newFilmName);
+            while (true)
+            {
+                Clear();
+                WriteLine("Voer de nieuwe filmnaam in: ");
+                string newFilmName = ReadLine();
+                string oldFilmName = selectedFilm.filmName;
+                if (filmsLogic.CheckFilmName(newFilmName))
+                {
+                    selectedFilm.filmName = newFilmName;
+                    //Functie aanroepen die alles logged wat er gebeurd.
+                    AdminLogger.LogAdminChangeFilmname(oldFilmName, newFilmName);
+                    break;
+                }
+
+            }
             break;
         case 1:
             // Change film description
-            Clear();
-            WriteLine("Voer de nieuwe beschrijving in: ");
-            string newFilmDescription = ReadLine();
-            string oldFilmDescription = selectedFilm.filmDescription;
-            selectedFilm.filmDescription = newFilmDescription;
-            AdminLogger.LogAdminChangeFilmDescription(selectedFilm.filmName, oldFilmDescription, newFilmDescription);
+            while (true)
+            {
+                Clear();
+                WriteLine("Voer de nieuwe beschrijving in: ");
+                string newFilmDescription = ReadLine();
+                string oldFilmDescription = selectedFilm.filmDescription;
+                if (filmsLogic.CheckFilmDescription(newFilmDescription))
+                {
+                    selectedFilm.filmDescription = newFilmDescription;
+                    AdminLogger.LogAdminChangeFilmDescription(selectedFilm.filmName, oldFilmDescription, newFilmDescription);
+                    break;
+                }
+            }
             break;
         case 2:
             // Change film date
-            Clear();
-            WriteLine("Voer de nieuwe datum in: ");
-            string newFilmDate = ReadLine();
-            string oldFilmDate = selectedFilm.filmDate;
-            selectedFilm.filmDate = newFilmDate;
-            AdminLogger.LogAdminChangeFilmDescription(selectedFilm.filmName, oldFilmDate, newFilmDate);
+            while (true)
+            { 
+                Clear();
+                WriteLine("Voer de nieuwe datum in: ");
+                string newFilmDate = ReadLine();
+                string oldFilmDate = selectedFilm.filmDate;
+                if (filmsLogic.CheckFilmDate(newFilmDate))
+                {
+                    selectedFilm.filmDate = newFilmDate;
+                    AdminLogger.LogAdminChangeFilmDescription(selectedFilm.filmName, oldFilmDate, newFilmDate);
+                    break;
+                }
+            }
             break;
         case 3:
             // Change film time
-            Clear();
-            WriteLine("Voer de nieuwe tijd in: ");
-            string newFilmTime = ReadLine();
-            string oldFilmTime = selectedFilm.filmTime;
-            selectedFilm.filmTime = newFilmTime;
-            AdminLogger.LogAdminChangeFilmTime(selectedFilm.filmName, oldFilmTime, newFilmTime);
-            break;
-        case 4:
-            // Change film room
-            Clear();
-            WriteLine("Voer de nieuwe zaal in: ");
-            string newFilmRoom = ReadLine();
-            string oldFilmRoom = selectedFilm.filmRoom;
-            selectedFilm.filmRoom = newFilmRoom;
-            AdminLogger.LogAdminChangeFilmRoom(selectedFilm.filmName, oldFilmRoom, newFilmRoom);
+            while (true)
+            {
+                Clear();
+                WriteLine("Voer de nieuwe tijd in: ");
+                string newFilmTime = ReadLine();
+                string oldFilmTime = selectedFilm.filmTime;
+                if (filmsLogic.CheckFilmTime(newFilmTime))
+                {
+                    selectedFilm.filmTime = newFilmTime;
+                    AdminLogger.LogAdminChangeFilmTime(selectedFilm.filmName, oldFilmTime, newFilmTime);
+                    break;
+                }
+            }
             break;
         }
 
@@ -368,7 +396,7 @@ class AdminMenus
         filmsLogic.UpdateFilm(selectedFilm);
 
         // Go back to film admin menu
-        FilmsAdmin();
+        AdminInfoFilm();
 
     }
 
