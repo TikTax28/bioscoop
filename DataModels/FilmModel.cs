@@ -23,6 +23,9 @@ public class FilmModel
     [JsonPropertyName("filmRoom")]
     public string filmRoom { get; set; }
 
+    [JsonPropertyName("active")]
+    public bool Active { get; set; }
+
     public FilmModel()
     {
         Id = NextId();
@@ -36,6 +39,7 @@ public class FilmModel
         filmDate = filmdate;
         filmTime = filmtime;
         filmRoom = filmroom;
+        Active = true;
 
         _nextId = Id + 1;
     }

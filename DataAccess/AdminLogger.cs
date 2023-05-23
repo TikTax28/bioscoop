@@ -18,7 +18,7 @@ static class AdminLogger
     {
         // Neerzetten wat er precies gelogd moet worden.
         string Adminname = AccountsLogic.CurrentAccount.FullName;
-        string data = $"Admin {Adminname} heeft de film: {filmname} verwijderd.";
+        string data = $"Admin {Adminname} heeft de film: {filmname} op non-actief gezet.";
 
         using (StreamWriter writer = new StreamWriter(path, true))
         {
