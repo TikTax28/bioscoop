@@ -181,15 +181,11 @@ class AdminMenus
             switch (SelectedIndex2)
             {
                 case 0:
-                        // Use the name of the selected option to get the film info
-                        // while (filmsLogic.GetByName(options[SelectedIndex]) != null)
-                        // {
                             FilmModel filmToDelete = filmsLogic.GetByName(options[SelectedIndex]);
                             string filmToDeleteForLog = filmToDelete.filmName;
                             filmsLogic.DeleteFilm(filmToDelete);
                             //Functie aanroepen die alles logged wat er gebeurd.
                             AdminLogger.LogAdminRemoveFilm(filmToDeleteForLog);
-                        // }
                         AdminRemoveFilm();
                         break;
                 case 1:
@@ -312,7 +308,8 @@ class AdminMenus
         $"Beschrijving: {selectedFilm.filmDescription}",
         $"Datum: {selectedFilm.filmDate}",
         $"Tijd: {selectedFilm.filmTime}",
-        $"Zaal: {selectedFilm.filmRoom}"
+        $"Zaal: {selectedFilm.filmRoom}",
+        $"Actief: {selectedFilm.Active}"
         };
         Menu info = new Menu(prompt, options);
         int SelectedIndex = info.Run();
@@ -324,35 +321,46 @@ class AdminMenus
             Clear();
             WriteLine("Voer de nieuwe filmnaam in: ");
             string newFilmName = ReadLine();
+            string oldFilmName = selectedFilm.filmName;
             selectedFilm.filmName = newFilmName;
+            //Functie aanroepen die alles logged wat er gebeurd.
+            AdminLogger.LogAdminChangeFilmname(oldFilmName, newFilmName);
             break;
         case 1:
             // Change film description
             Clear();
             WriteLine("Voer de nieuwe beschrijving in: ");
             string newFilmDescription = ReadLine();
+            string oldFilmDescription = selectedFilm.filmDescription;
             selectedFilm.filmDescription = newFilmDescription;
+            AdminLogger.LogAdminChangeFilmDescription(selectedFilm.filmName, oldFilmDescription, newFilmDescription);
             break;
         case 2:
             // Change film date
             Clear();
             WriteLine("Voer de nieuwe datum in: ");
             string newFilmDate = ReadLine();
+            string oldFilmDate = selectedFilm.filmDate;
             selectedFilm.filmDate = newFilmDate;
+            AdminLogger.LogAdminChangeFilmDescription(selectedFilm.filmName, oldFilmDate, newFilmDate);
             break;
         case 3:
             // Change film time
             Clear();
             WriteLine("Voer de nieuwe tijd in: ");
             string newFilmTime = ReadLine();
+            string oldFilmTime = selectedFilm.filmTime;
             selectedFilm.filmTime = newFilmTime;
+            AdminLogger.LogAdminChangeFilmTime(selectedFilm.filmName, oldFilmTime, newFilmTime);
             break;
         case 4:
             // Change film room
             Clear();
             WriteLine("Voer de nieuwe zaal in: ");
             string newFilmRoom = ReadLine();
+            string oldFilmRoom = selectedFilm.filmRoom;
             selectedFilm.filmRoom = newFilmRoom;
+            AdminLogger.LogAdminChangeFilmRoom(selectedFilm.filmName, oldFilmRoom, newFilmRoom);
             break;
         }
 

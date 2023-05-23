@@ -196,5 +196,58 @@
         "seat": 16
       }
     ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "L",
+        "seat": 10
+      },
+      {
+        "row": "L",
+        "seat": 11
+      },
+      {
+        "row": "L",
+        "seat": 12
+      }
+    ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": []
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": []
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": []
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "D",
+        "seat": 1
+      }
+    ]
+  },
+  {
+    "account_id": 5,
+    "film_id": 1,
+    "seats": [
+      {
+        "row": "A",
+        "seat": 1
+      }
+    ]
   }
 ]

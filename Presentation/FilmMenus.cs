@@ -287,6 +287,7 @@ class FilmMenus
                     FilmMenu();
                     break;
                 case ConsoleKey.Enter:
+                    if (reservedSeats.Count > 0)
                     InfoFilmReservation(reservedSeats, selectedFilmName, selectedDate, selectedTime);
                     break;
             }
