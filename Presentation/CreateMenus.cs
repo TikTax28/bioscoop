@@ -137,7 +137,6 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
     private void Reservations()
     {
         Clear();
-        WriteLine("Geen reserveringen");
     }
 
 
