@@ -22,7 +22,7 @@ uw gewenste films, data, tijden en stoelen selecteren en een reservering maken.
 De kaart(en) en de factuur worden na de betaling per email naar u verzonden.
 Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
-        string[] options = {"Inloggen of registreren", "Ga door zonder account", "Exit"};
+        string[] options = {"Inloggen of registreren", "Ga door zonder account", "Contact", "Exit"};
         Menu mainMenu = new Menu(prompt, options);
         int SelectedIndex = mainMenu.Run();
 
@@ -37,6 +37,10 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 Guest();
                 break;
             case 2:
+                Clear();
+                Contact();
+                break;
+            case 3:
                 Exit();
                 break;
             default:
@@ -130,6 +134,30 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
     {
         Clear();
         MainMenu();
+    }
+
+    public void Contact()
+    {
+    string prompt = " Onze bioscoop is gevestigd in Rotterdam en heeft 3 moderne zalen en 950 comfortabele zitplaatsen.\r\n " +
+    "Het filmaanbod is heel breed en ons personeel staat altijd klaar om je te helpen.\r\n " +
+    "Maak je filmuitje compleet met een snack die in de bioscoop beschikbaar zijn.\r\n " +
+    "De bioscoop is met de fiets, het openbaar vervoer of met de auto goed bereikbaar.\r\n " +
+    "Parkeren kan voordelig rondom de bioscoop en de trein- en bushalte zijn op loopafstand van de bioscoop.\r\n " +
+    "\r\n"+
+    "Contactgegevens\r\n" +
+    "Telefoon: 063729462\r\n" +
+    "E-mail: bioscoopRotterdam@gmail.com\r\n" +
+    "Website: www.bioscoopRotterdam.nl";
+    string[] options = {"Terug"};
+        Menu logMenu = new Menu(prompt, options);
+        int SelectedIndex = logMenu.Run();
+
+        switch (SelectedIndex)
+        {
+            case 0:
+                MainMenu();
+                break;
+        }
     }
 
     
