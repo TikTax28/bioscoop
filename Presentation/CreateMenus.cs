@@ -22,7 +22,7 @@ uw gewenste films, data, tijden en stoelen selecteren en een reservering maken.
 De kaart(en) en de factuur worden na de betaling per email naar u verzonden.
 Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
-        string[] options = {"Inloggen", "Ga door zonder account", "Exit"};
+        string[] options = {"Inloggen of registreren", "Ga door zonder account", "Exit"};
         Menu mainMenu = new Menu(prompt, options);
         int SelectedIndex = mainMenu.Run();
 
