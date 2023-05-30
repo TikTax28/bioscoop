@@ -162,10 +162,24 @@ class FilmsLogic
     public List<FilmModel> filmsOnlyActive()
     {
         List<FilmModel> allFilmsActive = GetAllFilms();
-        List<FilmModel> allFilms = GetAllFilms().ToList();;
+        List<FilmModel> allFilms = GetAllFilms().ToList();
+        DateTime currentDateTime = DateTime.Now;
+
         foreach (FilmModel film in allFilms)
         {
-            if (film.Active == false) allFilmsActive.Remove(film);
+            if (film.Active == false)
+            {
+                allFilmsActive.Remove(film);
+                continue;
+            }
+
+            string filmDateTimeString = film.filmDate + " " + film.filmTime; // Combine date and time strings
+            DateTime filmDateTime = DateTime.ParseExact(filmDateTimeString, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
+
+            if (currentDateTime > filmDateTime)
+            {
+                allFilmsActive.Remove(film);
+            }
         }
         return allFilmsActive;
     }
