@@ -2,11 +2,11 @@
   {
     "id": 1,
     "filmName": "abc",
-    "filmDescription": "Shrek krijgt een aneurysme",
-    "filmDate": "28-05-2024",
+    "filmDescription": "Shrek op reis",
+    "filmDate": "28-05-2023",
     "filmTime": "21:12",
     "filmRoom": "2",
-    "active": true
+    "active": false
   },
   {
     "id": 2,

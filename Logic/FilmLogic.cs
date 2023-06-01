@@ -100,6 +100,14 @@ class FilmsLogic
             WriteLine("Vul een geldige datum in. (DD-MM-YYYY)");
             return false;
         }
+        // DateTime currentDateTime = DateTime.Now;
+        // DateTime filmDateTime = DateTime.ParseExact(filmdate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+        // if (currentDateTime > filmDateTime)
+        // {
+        //     WriteLine("Vul een geldige datum in. (DD-MM-YYYY)");
+        //     return false;
+        // }
         return true;
     }
     public bool CheckFilmTime(string filmtime)
@@ -180,8 +188,10 @@ class FilmsLogic
             if (currentDateTime > filmDateTime)
             {
                 allFilmsActive.Remove(film);
+                film.Active = false;
             }
         }
+        FilmsAccess.WriteAll(allFilms);
         return allFilmsActive;
     }
 }
