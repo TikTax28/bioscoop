@@ -72,13 +72,18 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
     public void LoggedInMenu()
     {
-        string prompt = @"Welkom bij het bioscoopreserveringssysteem!
-Met dit reserveringssysteem kunt u door de nieuwste filmlijsten bladeren, 
-uw gewenste films, data, tijden en stoelen selecteren en een reservering maken. 
-De kaart(en) en de factuur worden na de betaling per email naar u verzonden.
-Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
+        string prompt = "";
+        try
+        {
+            prompt = $"Welkom {AccountsLogic.CurrentAccount.FullName}";
+        }
+        catch
+        {
+            prompt = $"Welkom gastgebruiker";
+        }
 
-        string[] options = {"Films", "Reserveringen", "Uitloggen", "Exit"};
+
+        string[] options = {"Films", "Uitloggen", "Exit"};
         Menu logMenu = new Menu(prompt, options);
         int SelectedIndex = logMenu.Run();
 
@@ -88,12 +93,9 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 films.FilmMenu();
                 break;
             case 1:
-                Reservations();
-                break;
-            case 2:
                 LogOut();
                 break;
-            case 3:
+            case 2:
                 Exit();
                 break;
             default:
@@ -131,14 +133,6 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         Clear();
         MainMenu();
     }
-
-    
-
-    private void Reservations()
-    {
-        Clear();
-    }
-
 
     public void Snacks()
     {
