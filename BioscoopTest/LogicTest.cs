@@ -78,4 +78,58 @@ public class LogicTest
         var changedFilm = filmsLogic.GetByName("top gun");
         Assert.Equal(changedFilm.filmName, "top gun");
     }
+
+    [Fact]
+    public void TestRegisterUser()
+    {
+        // Arrange
+        var accountsLogic = new AccountsLogic();
+        string email = "test@voorbeeld.com";
+        string password = "wachtwoord123a";
+        string fullName = "Tom Cruise";
+        accountsLogic.AddAccount(email, password, fullName, false);
+
+        // Act
+        var actualAccount = accountsLogic.CheckLogin(email, password);
+
+        // Assert
+        Assert.Equal(email, actualAccount.EmailAddress);
+        Assert.Equal(password, actualAccount.Password);
+        Assert.Equal(fullName, actualAccount.FullName);
+    }
+
+    [Fact]
+    public void testLogAdminAddFilm()
+    {
+        // Arrange
+        AccountsLogic.CurrentAccount = new AccountModel{FullName = "Tom Cruise"}; //tijdelijk currentaccount zetten.
+        string filmName = "Test Film";
+        string filmDate = "06-05-2023";
+        string filmTime = "18:00";
+        string filmRoom = "1";
+        string expectedLog = $"Admin Tom Cruise heeft een film toegevoegd met als naam: {filmName}, datum: {filmDate}, tijd: {filmTime} en in zaal: {filmRoom}.";
+
+        // Act
+        AdminLogger.LogAdminAddFilm(filmName, filmDate, filmTime, filmRoom);
+
+        // Assert
+        string[] logs = System.IO.File.ReadAllLines(AdminLogger.path);
+        Assert.Contains(expectedLog, logs);
+    }
+
+    [Fact]
+    public void testLogAdminRemoveFilm()
+    {
+        // Arrange
+        AccountsLogic.CurrentAccount = new AccountModel{FullName = "Tom Cruise"}; //tijdelijk currentaccount zetten.
+        string filmName = "Test Film";
+        string expectedLog = $"Admin Tom Cruise heeft de film: {filmName} op non-actief gezet.";
+
+        // Act
+        AdminLogger.LogAdminRemoveFilm(filmName);
+
+        // Assert
+        string[] logs = System.IO.File.ReadAllLines(AdminLogger.path);
+        Assert.Contains(expectedLog, logs);
+    }
 }

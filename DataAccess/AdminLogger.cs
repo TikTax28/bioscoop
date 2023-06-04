@@ -1,6 +1,6 @@
 static class AdminLogger
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/adminLog.csv"));
+    public static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/adminLog.csv"));
 
     public static void LogAdminAddFilm(string filmname, string filmdate, string filmtime, string filmroom)
     {
@@ -25,19 +25,7 @@ static class AdminLogger
             writer.WriteLine(string.Join(",", data));
         }
     }
-    /*
-    public static void LogSeatsAdmin() //functie voor wanneer admin stoelen aanpast.
-    {
-        string Adminname = AccountsLogic.CurrentAccount.FullName;
-        string data = $"Admin {Adminname} heeft bij de film: {filmname} op: {filmdate} om: {filmtime} een aanpassing gedaan bij de volgende stoelen: {listofchairs}.";
 
-        
-        using (StreamWriter writer = new StreamWriter(path, true))
-        {
-            writer.WriteLine(string.Join(",", data));
-        }
-    }
-    */
     public static void LogAdminChangeFilmname(string filmname, string newFilmname)
     {
         // Neerzetten wat er precies gelogd moet worden.
