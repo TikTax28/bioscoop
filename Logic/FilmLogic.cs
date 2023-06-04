@@ -100,14 +100,14 @@ class FilmsLogic
             WriteLine("Vul een geldige datum in. (DD-MM-YYYY)");
             return false;
         }
-        // DateTime currentDateTime = DateTime.Now;
-        // DateTime filmDateTime = DateTime.ParseExact(filmdate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        DateTime currentDateTime = DateTime.Now.Date;
+        DateTime filmDateTime = DateTime.ParseExact(filmdate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
-        // if (currentDateTime > filmDateTime)
-        // {
-        //     WriteLine("Vul een geldige datum in. (DD-MM-YYYY)");
-        //     return false;
-        // }
+        if (currentDateTime > filmDateTime)
+        {
+            WriteLine("Datum is al geweest vul een nieuwe datum in.");
+            return false;
+        }
         return true;
     }
     public bool CheckFilmTime(string filmtime)
