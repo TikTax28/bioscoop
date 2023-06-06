@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "emailAddress": "tom@nl",
+    "password": "tom",
+    "fullName": "Tom Tom",
+    "isAdmin": true
+  },
+  {
+    "id": 3,
+    "emailAddress": "test@test.nl",
+    "password": "yusuf",
+    "fullName": "tester",
+    "isAdmin": false
+  },
+  {
+    "id": 4,
+    "emailAddress": "jasper@jasper.nl",
+    "password": "jasper123",
+    "fullName": "jasper",
+    "isAdmin": false
+  },
+  {
+    "id": 5,
+    "emailAddress": "test@nl",
+    "password": "test",
+    "fullName": "kuku",
+    "isAdmin": false
+  },
+  {
+    "id": 6,
+    "emailAddress": "test@example.com",
+    "password": "password123",
+    "fullName": "test",
+    "isAdmin": false
+  },
+  {
+    "id": 7,
+    "emailAddress": "test@voorbeeld.com",
+    "password": "wachtwoord123a",
+    "fullName": "Tom Cruise",
+    "isAdmin": false
+  }
+]

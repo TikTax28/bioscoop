@@ -97,5 +97,41 @@
     "filmTime": "19:00",
     "filmRoom": "1",
     "active": true
+  },
+  {
+    "id": 24,
+    "filmName": "The Maze Runner",
+    "filmDescription": "Thomas ontwaakt in een gigantisch labyrint en \r\n                                herinnert zich niets van zijn verleden. Samen \r\n                                met andere tieners probeert hij te ontsnappen.",
+    "filmDate": "10-10-2024",
+    "filmTime": "19:00",
+    "filmRoom": "1",
+    "active": true
+  },
+  {
+    "id": 25,
+    "filmName": "top gun",
+    "filmDescription": "shrek the movie",
+    "filmDate": "14-06-2023",
+    "filmTime": "15:00",
+    "filmRoom": "1",
+    "active": true
+  },
+  {
+    "id": 27,
+    "filmName": "The Maze Runner",
+    "filmDescription": "Thomas ontwaakt in een gigantisch labyrint en \r\n                                herinnert zich niets van zijn verleden. Samen \r\n                                met andere tieners probeert hij te ontsnappen.",
+    "filmDate": "10-10-2024",
+    "filmTime": "19:00",
+    "filmRoom": "1",
+    "active": true
+  },
+  {
+    "id": 28,
+    "filmName": "shrek",
+    "filmDescription": "shrek the movie",
+    "filmDate": "14-06-2023",
+    "filmTime": "15:00",
+    "filmRoom": "1",
+    "active": true
   }
 ]
