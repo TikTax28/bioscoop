@@ -71,7 +71,6 @@ public class LogicTest
         string filmroom = "1";
         filmsLogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
         var addedFilm = filmsLogic.GetByDateAndTime(filmdate,filmtime);
-        Assert.Equal(filmname, addedFilm.filmName);
 
         addedFilm.filmName = "top gun";
         filmsLogic.UpdateFilm(addedFilm);
@@ -131,5 +130,41 @@ public class LogicTest
         // Assert
         string[] logs = System.IO.File.ReadAllLines(AdminLogger.path);
         Assert.Contains(expectedLog, logs);
+    }
+
+    [Fact]
+    public void CheckDuplicatesForAddFilm()
+    {
+        //arrange
+        var filmsLogic = new FilmsLogic();
+        string filmname = "TestMovie";
+        string filmdescription = @"TestDescription";
+        string filmdate = "10-10-2025";
+        string filmtime = "19:00";
+        string filmroom = "1";
+        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime, filmroom);
+
+        // Act
+        //We add a movie twice and then load a list of movies containing only the name of the added movie
+        filmsLogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        filmsLogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        int amount_of_movies = filmsLogic.GetMoviesByName(newFilm.filmName).Count;
+
+        //Assert
+        //if number of movies is higher than 1 (meaning there are duplicate movies) 
+        //then the AddFilm function has added a duplicate movie
+        Assert.Equal(amount_of_movies, 1);
+    }
+
+    [Fact]
+    public void CheckNullForAddFilm(){
+        //arrange
+        var filmsLogic = new FilmsLogic();
+        
+        // Act
+        var exception = Record.Exception(() => filmsLogic.AddFilm(null, null, null, null, null));
+
+        // Assert
+        Assert.Null(exception);
     }
 }

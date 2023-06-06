@@ -51,6 +51,12 @@ class FilmsLogic
     {
         return _films;
     }
+
+    //returns list of movies of name
+    public List<FilmModel> GetMoviesByName(string name){
+        return _films.Where(x => x.filmName == name).ToList();
+    }
+
     public void DeleteFilm(FilmModel film)
     {
         film.Active = false;
@@ -143,9 +149,28 @@ class FilmsLogic
         }
         return false;
     }
-    public void AddFilm(string filmname, string filmdescription, string filmdate, string filmtime, string filmroom)
+
+    public bool CheckDuplicates(FilmModel film)
     {
-        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime, filmroom);
+        if (_films.Any(f => f.filmDate == film.filmDate && f.filmTime == film.filmTime && f.filmRoom == film.filmRoom))
+        {
+            WriteLine("Film with the same details already exists.");
+            return false;
+        }
+        
+        return true;
+    }
+
+    public void AddFilm(string filmName, string filmDescription, string filmDate, string filmTime, string filmRoom)
+    {
+        // Check if a film with the same details already exists
+        if (_films.Any(f => f.filmDate == filmDate && f.filmTime == filmTime && f.filmRoom == filmRoom))
+        {
+            WriteLine("Film with the same details already exists.");
+            return;
+        }
+
+        FilmModel newFilm = new FilmModel(filmName, filmDescription, filmDate, filmTime, filmRoom);
         _films.Add(newFilm);
         FilmsAccess.WriteAll(_films);
     }
