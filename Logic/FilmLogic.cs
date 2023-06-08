@@ -170,6 +170,10 @@ class FilmsLogic
 
     public void AddFilm(string filmName, string filmDescription, string filmDate, string filmTime, string filmRoom)
     {
+        if (filmName == null || filmDescription == null || filmDate == null || filmTime == null || filmRoom == null)
+        {
+            return;
+        }
         // Check if a film with the same details already exists
         if (_films.Any(f => f.filmDate == filmDate && f.filmTime == filmTime && f.filmRoom == filmRoom))
         {

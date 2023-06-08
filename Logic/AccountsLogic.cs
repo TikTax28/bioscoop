@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-
+using static System.Console;
 
 //This class is not static so later on we can use inheritance and interfaces
 class AccountsLogic
@@ -61,6 +61,11 @@ class AccountsLogic
 
     public void AddAccount(string emailAddress, string password, string fullName, bool isadmin)
     {
+        if (_accounts.Any(f => f.EmailAddress == emailAddress))
+        {
+            WriteLine("Account with the same details already exists.");
+            return;
+        }
         AccountModel newAccount = new AccountModel(emailAddress, password, fullName, isadmin);
         _accounts.Add(newAccount);
         AccountsAccess.WriteAll(_accounts);
