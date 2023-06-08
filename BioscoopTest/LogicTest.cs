@@ -167,4 +167,26 @@ public class LogicTest
         // Assert
         Assert.Null(exception);
     }
+
+    [Fact]
+    public void TestRemoveFilm()
+    {
+        // Arrange
+        FilmsLogic filmslogic = new FilmsLogic();
+        string filmname = "Titanic";
+        string filmdescription = @"The titanic is a ship";
+        string filmdate = "10-12-2024";
+        string filmtime = "20:00";
+        string filmroom = "3";
+        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime, filmroom);
+
+        // Act
+        filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        FilmModel addedFilm = filmslogic.GetByDateAndTime(filmdate, filmtime);
+        filmslogic.DeleteFilm(addedFilm);
+
+
+        // Assert
+        Assert.Null(filmslogic.GetByDateAndTime(filmdate, filmtime, newFilm.Active));
+    }
 }

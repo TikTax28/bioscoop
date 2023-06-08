@@ -45,8 +45,15 @@ class FilmsLogic
     }
     public FilmModel GetByDateAndTime(string date, string time)
     {
-        return _films.Find(i => i.filmDate == date && i.filmTime == time);
+        FilmModel film = _films.Find(i => i.filmDate == date && i.filmTime == time);
+        return film ?? null;
     }
+    public FilmModel GetByDateAndTime(string date, string time, bool active)
+    {
+        FilmModel film = _films.Find(i => i.filmDate == date && i.filmTime == time && i.Active == true);
+        return film ?? null;
+    }
+
     public List<FilmModel> GetAllFilms()
     {
         return _films;
