@@ -13,4 +13,19 @@ class SeatModel
         Row = row;
         Seat = seat;
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        SeatModel otherSeat = (SeatModel)obj;
+
+        return Row == otherSeat.Row && Seat == otherSeat.Seat;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Row, Seat);
+    }
 }

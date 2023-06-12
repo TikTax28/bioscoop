@@ -17,10 +17,14 @@ public class LogicTest
         FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime, filmroom);
 
         // Act
+        // Using the AddFilm method
         filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
         FilmModel addedFilm = filmslogic.GetByDateAndTime(filmdate, filmtime);
 
         // Assert
+        // Check if the film is equal with the added film
+        // Note: The properties are compared seperately
+        // because ID is always unique
         Assert.Equal(newFilm.filmName, addedFilm.filmName);
         Assert.Equal(newFilm.filmDescription, addedFilm.filmDescription);
         Assert.Equal(newFilm.filmDate, addedFilm.filmDate);
@@ -187,6 +191,42 @@ public class LogicTest
 
 
         // Assert
-        Assert.Null(filmslogic.GetByDateAndTime(filmdate, filmtime, newFilm.Active));
+        Assert.Null(filmslogic.GetByDateAndTime(filmdate, filmtime, newFilm.Active)); // return null if film not found
+    }
+
+    [Fact]
+    public void TestReserveSeat()
+    {
+        // Arrange
+        BookingLogic bookinglogic = new BookingLogic();
+        FilmsLogic filmslogic = new FilmsLogic();
+        // We need the film info to know which film we want to reserve seats for
+        string filmname = "Indiana Jones";
+        string filmdescription = "Indiana Jones on adventure";
+        string filmdate = "30-6-2023";
+        string filmtime = "17:00";
+        string filmroom = "3";
+
+        List<string> reservedSeats = new List<string>();
+        reservedSeats.Add("A1");
+        reservedSeats.Add("B2");
+        reservedSeats.Add("F6");
+
+        // We need this list of seatmodel so we can do assert later
+        List<SeatModel> seats = new List<SeatModel>();
+        seats.Add(new SeatModel("A", 1));
+        seats.Add(new SeatModel("B", 2));
+        seats.Add(new SeatModel("F", 6));
+
+        // Act
+        filmslogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        FilmModel addedFilm = filmslogic.GetByDateAndTime(filmdate, filmtime);
+
+        bookinglogic.AddReservation(reservedSeats, addedFilm.filmDate, addedFilm.filmTime);
+        BookingModel bookedFilm = bookinglogic.GetById(addedFilm.Id);
+        
+        // Assert
+        Assert.Equal(seats, bookedFilm.Seats);
+
     }
 }
