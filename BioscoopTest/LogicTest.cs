@@ -144,7 +144,8 @@ public class LogicTest
     }
 
     [Fact]
-    public void CheckNullForAddFilm(){
+    public void CheckNullForAddFilm()
+    {
         //arrange
         var filmsLogic = new FilmsLogic();
         
@@ -210,6 +211,25 @@ public class LogicTest
         
         // Assert
         Assert.Equal(seats, bookedFilm.Seats);
+    }
+ 
 
+    [Fact]
+    void TestGetAllFilms()
+    {
+        // Arrange
+        var logic = new FilmsLogic();
+        var film1 = new FilmModel { Id = 1, filmName = "Film 1" };
+        var film2 = new FilmModel { Id = 2, filmName = "Film 2" };
+        logic.UpdateList(film1);
+        logic.UpdateList(film2);
+
+        // Act
+        var result = logic.GetAllFilms();
+
+        // Assert
+        Assert.Equal(19, result.Count);
+        Assert.Contains(film1, result);
+        Assert.Contains(film2, result);
     }
 }
