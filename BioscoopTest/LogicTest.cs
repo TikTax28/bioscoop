@@ -232,8 +232,44 @@ public class LogicTest
         var result = logic.GetAllFilms();
 
         // Assert
-        Assert.Equal(19, result.Count);
+        Assert.Equal(20, result.Count);
         Assert.Contains(film1, result);
         Assert.Contains(film2, result);
     }
+
+       [Fact]
+    void TestDuplicatesForAddFilm2()
+    {
+        //arrange
+        var filmsLogic = new FilmsLogic();
+        string filmname = "TestFilm2";
+        string filmdescription = @"This is a test discription";
+        string filmdate = "10-10-2029";
+        string filmtime = "08:00";
+        string filmroom = "3";
+        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime, filmroom);
+
+        // Act
+        //We add a movie twice and then load a list of movies containing only the name of the added movie
+        filmsLogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        filmsLogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        int amount_of_movies = filmsLogic.GetMoviesByName(newFilm.filmName).Count;
+
+        //Assert
+        //if number of movies is higher than 1 (meaning there are duplicate movies) 
+        //then the AddFilm function has added a duplicate movie
+        Assert.Equal(amount_of_movies, 1);
+    }
+
+        [Fact]
+        void TestNullForAddFilm(){
+            //arrange
+            var filmsLogic = new FilmsLogic();
+            
+            // Act
+            var exception = Record.Exception(() => filmsLogic.AddFilm(null, null, null, null, null));
+
+            // Assert
+            Assert.Null(exception);
+        }
 }
