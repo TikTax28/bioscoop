@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios\\bioscoop-3\\Project.csproj": {}
+    "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios\\bioscoop-3\\Project.csproj": {
+    "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios\\bioscoop-3\\Project.csproj",
+        "projectUniqueName": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios\\bioscoop-3\\Project.csproj",
-        "packagesPath": "C:\\Users\\herot\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\herot\\OneDrive\\Bureaublad\\bios\\bioscoop-3\\obj\\",
+        "projectPath": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\Project.csproj",
+        "packagesPath": "C:\\Users\\nbjja\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nbjja\\source\\repos\\bioscoop-1\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\herot\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\nbjja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,21 +44,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[17.6.0, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.5.0-pre.11, )"
-            },
-            "xunit.runner.visualstudio": {
-              "target": "Package",
-              "version": "[2.4.5, )"
             }
           },
           "imports": [
@@ -71,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
