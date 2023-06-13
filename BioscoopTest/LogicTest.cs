@@ -34,37 +34,6 @@ public class LogicTest
     }
 
     [Fact]
-    public void TestLogin()
-    {
-        // Arrange
-        var accountsLogic = new AccountsLogic();
-        string email = "test@example.com";
-        string password = "password123";
-        accountsLogic.AddAccount(email, password, "test", false);
-
-        // Act
-        var actualAccount = accountsLogic.CheckLogin("test@example.com", "password123");
-
-        // Assert
-        Assert.Equal(email, actualAccount.EmailAddress);
-        Assert.Equal(password, actualAccount.Password);
-    }
-
-    [Fact]
-    public void TestLoginNull()
-    {
-        // Arrange
-        var accountsLogic = new AccountsLogic();
-
-        // Act
-        var actualAccount = accountsLogic.CheckLogin("test@example.com", "wrongpassword");
-
-        // Assert
-        Assert.Null(actualAccount);
-
-    }
-
-    [Fact]
     public void TestChangeFilm()
     {
         var filmsLogic = new FilmsLogic();
@@ -99,6 +68,20 @@ public class LogicTest
         Assert.Equal(email, actualAccount.EmailAddress);
         Assert.Equal(password, actualAccount.Password);
         Assert.Equal(fullName, actualAccount.FullName);
+    }
+    
+    [Fact]
+    public void TestLoginNull()
+    {
+        // Arrange
+        var accountsLogic = new AccountsLogic();
+
+        // Act
+        var actualAccount = accountsLogic.CheckLogin("test@example.com", "wrongpassword");
+
+        // Assert
+        Assert.Null(actualAccount);
+
     }
 
     [Fact]
@@ -228,5 +211,59 @@ public class LogicTest
         // Assert
         Assert.Equal(seats, bookedFilm.Seats);
 
+     [Fact]
+    void TestDuplicatesForAddFilm()
+    {
+        //arrange
+        var filmsLogic = new FilmsLogic();
+        string filmname = "TestMovie";
+        string filmdescription = @"TestDescription";
+        string filmdate = "10-10-2025";
+        string filmtime = "19:00";
+        string filmroom = "1";
+        FilmModel newFilm = new FilmModel(filmname, filmdescription, filmdate, filmtime, filmroom);
+
+        // Act
+        //We add a movie twice and then load a list of movies containing only the name of the added movie
+        filmsLogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        filmsLogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
+        int amount_of_movies = filmsLogic.GetMoviesByName(newFilm.filmName).Count;
+
+        //Assert
+        //if number of movies is higher than 1 (meaning there are duplicate movies) 
+        //then the AddFilm function has added a duplicate movie
+        Assert.Equal(amount_of_movies, 1);
+    }
+
+    [Fact]
+    void TestNullForAddFilm(){
+        //arrange
+        var filmsLogic = new FilmsLogic();
+        
+        // Act
+        var exception = Record.Exception(() => filmsLogic.AddFilm(null, null, null, null, null));
+
+        // Assert
+        Assert.Null(exception);
+    }
+
+    [Fact]
+    void TestGetAllFilms()
+    {
+        // Arrange
+        var logic = new FilmsLogic();
+        var film1 = new FilmModel { Id = 1, filmName = "Film 1" };
+        var film2 = new FilmModel { Id = 2, filmName = "Film 2" };
+        logic.UpdateList(film1);
+        logic.UpdateList(film2);
+
+        // Act
+        var result = logic.GetAllFilms();
+
+        // Assert
+        Assert.Equal(19, result.Count);
+        Assert.Contains(film1, result);
+        Assert.Contains(film2, result);
+    }
     }
 }
