@@ -268,6 +268,4 @@ public class LogicTest
             // Assert
             Assert.Null(exception);
         }
-
-
 }
