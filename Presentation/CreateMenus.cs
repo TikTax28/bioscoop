@@ -160,39 +160,32 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         }
     }
 
-    
 
-    private void Reservations()
-    {
-        Clear();
-    }
+    // public void Snacks()
+    // {
+    //     string prompt = "Selecter een snack en klik op ENTER om te bevestigen";
 
+    //     string[] options = {"Cola", "...", "...", "Terug"};
+    //     Menu Films = new Menu(prompt, options);
+    //     int SelectedIndex = Films.Run();
 
-    public void Snacks()
-    {
-        string prompt = "Selecter een snack en klik op ENTER om te bevestigen";
-
-        string[] options = {"Cola", "...", "...", "Terug"};
-        Menu Films = new Menu(prompt, options);
-        int SelectedIndex = Films.Run();
-
-        switch (SelectedIndex)
-        {
-            case 0:
-                Snacks();
-                break;
-            case 1:
-                Snacks();
-                break;
-            case 2:
-                Snacks();
-                break;
-            case 3:        
-                break;
-            default:
-                break;
-        }
-    }
+    //     switch (SelectedIndex)
+    //     {
+    //         case 0:
+    //             Snacks();
+    //             break;
+    //         case 1:
+    //             Snacks();
+    //             break;
+    //         case 2:
+    //             Snacks();
+    //             break;
+    //         case 3:        
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     private void Exit()
     {
