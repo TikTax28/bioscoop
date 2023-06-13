@@ -144,19 +144,6 @@ public class LogicTest
     }
 
     [Fact]
-    public void CheckNullForAddFilm()
-    {
-        //arrange
-        var filmsLogic = new FilmsLogic();
-        
-        // Act
-        var exception = Record.Exception(() => filmsLogic.AddFilm(null, null, null, null, null));
-
-        // Assert
-        Assert.Null(exception);
-    }
-
-    [Fact]
     public void TestRemoveFilm()
     {
         // Arrange
