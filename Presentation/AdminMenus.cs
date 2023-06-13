@@ -6,7 +6,7 @@ class AdminMenus
     {
         string prompt = "Selecteer een optie en klik op ENTER om te bevestigen";
 
-        string[] options = {"Films beheren", "Stoelen beheren", "Snacks beheren", "Beheer klantgegevens", "Rapport printen", "Uitloggen"};
+        string[] options = {"Films beheren", "Uitloggen"};
         Menu Admin = new Menu(prompt, options);
         int SelectedIndex = Admin.Run();
 
@@ -16,18 +16,6 @@ class AdminMenus
                 FilmsAdmin();
                 break;
             case 1:
-                SeatsAdmin();
-                break;
-            case 2:
-                SnacksAdmin();
-                break;
-            case 3:
-                UserDetails();
-                break;
-            case 4:
-                Rapport();
-                break;
-            case 5:
                 CreateMenus menus = new CreateMenus();
                 menus.LogOut();
                 break;
@@ -397,26 +385,5 @@ class AdminMenus
 
         // Go back to film admin menu
         AdminInfoFilm();
-
-    }
-
-     private void SeatsAdmin()
-    {
-        
-    }
-
-     private void SnacksAdmin()
-    {
-        
-    }
-
-     private void UserDetails()
-    {
-        
-    }
-
-     private void Rapport()
-    {
-        
     }
 }
