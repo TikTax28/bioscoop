@@ -45,7 +45,7 @@ class FilmMenus
         string prompt2 = selectedFilm.filmDescription;
 
         Dictionary<string, List<FilmModel>> dateToTimes = new Dictionary<string, List<FilmModel>>();
-        foreach (FilmModel film in filmsLogic.GetAllFilms())    
+        foreach (FilmModel film in filmsLogic.filmsOnlyActive())    
         {
             if (film.filmName == selectedFilm.filmName)
             {

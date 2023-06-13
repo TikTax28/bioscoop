@@ -36,18 +36,22 @@ public class LogicTest
     [Fact]
     public void TestChangeFilm()
     {
+        // Arrange
         var filmsLogic = new FilmsLogic();
         string filmname = "shrek";
         string filmdescription = "shrek the movie";
         string filmdate = "14-06-2023";
         string filmtime = "15:00";
         string filmroom = "1";
+
+        // Act
         filmsLogic.AddFilm(filmname, filmdescription, filmdate, filmtime, filmroom);
         var addedFilm = filmsLogic.GetByDateAndTime(filmdate,filmtime);
-
         addedFilm.filmName = "top gun";
         filmsLogic.UpdateFilm(addedFilm);
         var changedFilm = filmsLogic.GetByName("top gun");
+
+        // Assert
         Assert.Equal(changedFilm.filmName, "top gun");
     }
 
