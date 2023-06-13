@@ -22,7 +22,7 @@ uw gewenste films, data, tijden en stoelen selecteren en een reservering maken.
 De kaart(en) en de factuur worden na de betaling per email naar u verzonden.
 Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
 
-        string[] options = {"Inloggen of registreren", "Ga door zonder account", "Contact", "Exit"};
+        string[] options = {"Inloggen of registreren", "Contact", "Exit"};
         Menu mainMenu = new Menu(prompt, options);
         int SelectedIndex = mainMenu.Run();
 
@@ -34,13 +34,9 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 break;      
             case 1:
                 Clear();
-                Guest();
-                break;
-            case 2:
-                Clear();
                 Contact();
                 break;
-            case 3:
+            case 2:
                 Exit();
                 break;
             default:
@@ -107,6 +103,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
         }
     }
 
+    /*
     private void Guest()
     {
         string prompt = @"Welkom bij het bioscoopreserveringssysteem!
@@ -131,6 +128,7 @@ Volg de aanwijzingen op dit scherm en ons systeem zal u door de rest leiden.";
                 break;
         }
     }
+    */
 
     public void LogOut()
     {

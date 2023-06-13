@@ -34,37 +34,6 @@ public class LogicTest
     }
 
     [Fact]
-    public void TestLogin()
-    {
-        // Arrange
-        var accountsLogic = new AccountsLogic();
-        string email = "test@example.com";
-        string password = "password123";
-        accountsLogic.AddAccount(email, password, "test", false);
-
-        // Act
-        var actualAccount = accountsLogic.CheckLogin("test@example.com", "password123");
-
-        // Assert
-        Assert.Equal(email, actualAccount.EmailAddress);
-        Assert.Equal(password, actualAccount.Password);
-    }
-
-    [Fact]
-    public void TestLoginNull()
-    {
-        // Arrange
-        var accountsLogic = new AccountsLogic();
-
-        // Act
-        var actualAccount = accountsLogic.CheckLogin("test@example.com", "wrongpassword");
-
-        // Assert
-        Assert.Null(actualAccount);
-
-    }
-
-    [Fact]
     public void TestChangeFilm()
     {
         var filmsLogic = new FilmsLogic();
@@ -99,6 +68,20 @@ public class LogicTest
         Assert.Equal(email, actualAccount.EmailAddress);
         Assert.Equal(password, actualAccount.Password);
         Assert.Equal(fullName, actualAccount.FullName);
+    }
+    
+    [Fact]
+    public void TestLoginNull()
+    {
+        // Arrange
+        var accountsLogic = new AccountsLogic();
+
+        // Act
+        var actualAccount = accountsLogic.CheckLogin("test@example.com", "wrongpassword");
+
+        // Assert
+        Assert.Null(actualAccount);
+
     }
 
     [Fact]
