@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "filmName": "abc",
+    "filmName": "Shrek 1",
     "filmDescription": "Shrek op reis",
-    "filmDate": "28-05-2023",
+    "filmDate": "28-06-2023",
     "filmTime": "21:12",
     "filmRoom": "2",
-    "active": false
+    "active": true
   },
   {
     "id": 2,
-    "filmName": "abc",
-    "filmDescription": "Dit is test2",
+    "filmName": "Shrek 1",
+    "filmDescription": "Shrek op reis",
     "filmDate": "17-12-2025",
     "filmTime": "21:12",
     "filmRoom": "3",
@@ -19,8 +19,8 @@
   },
   {
     "id": 3,
-    "filmName": "abc",
-    "filmDescription": "Dit is test3",
+    "filmName": "Shrek 2",
+    "filmDescription": "Shrek op avontuur",
     "filmDate": "12-12-2023",
     "filmTime": "12:30",
     "filmRoom": "1",
@@ -28,11 +28,11 @@
   },
   {
     "id": 4,
-    "filmName": "abcc",
-    "filmDescription": "abcd",
-    "filmDate": "29-02-2023",
+    "filmName": "Shrek 3",
+    "filmDescription": "Shrek de koning",
+    "filmDate": "29-06-2023",
     "filmTime": "13:13",
     "filmRoom": "3",
-    "active": false
+    "active": true
   }
 ]
