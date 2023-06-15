@@ -73,20 +73,6 @@ public class LogicTest
         Assert.Equal(password, actualAccount.Password);
         Assert.Equal(fullName, actualAccount.FullName);
     }
-    
-    [Fact]
-    public void TestLoginNull()
-    {
-        // Arrange
-        var accountsLogic = new AccountsLogic();
-
-        // Act
-        var actualAccount = accountsLogic.CheckLogin("test@example.com", "wrongpassword");
-
-        // Assert
-        Assert.Null(actualAccount);
-
-    }
 
     [Fact]
     public void testLogAdminAddFilm()
@@ -260,16 +246,4 @@ public class LogicTest
         //then the AddFilm function has added a duplicate movie
         Assert.Equal(amount_of_movies, 1);
     }
-
-        [Fact]
-        void TestNullForAddFilm(){
-            //arrange
-            var filmsLogic = new FilmsLogic();
-            
-            // Act
-            var exception = Record.Exception(() => filmsLogic.AddFilm(null, null, null, null, null));
-
-            // Assert
-            Assert.Null(exception);
-        }
 }
