@@ -185,7 +185,7 @@ class FilmMenus
 
         while (running) {
             Clear();
-            WriteLine("Selecteer een stoel (gebruik de pijltjestoetsen om te bewegen, spatiebalk om te reserveren of Esc om te verlaten):");
+            WriteLine("Selecteer een stoel (gebruik de pijltjestoetsen om te bewegen, spatiebalk om een stoel te selecteren, ENTER om te reserveren of Esc om te verlaten):");
             WriteLine();
             WriteLine(screen);
 
